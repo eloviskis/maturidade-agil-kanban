@@ -41,10 +41,12 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Algo deu errado!', message: err.message });
 });
 
-// Iniciar servidor
-app.listen(PORT, () => {
-    console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
-    console.log(`📊 API disponível em http://localhost:${PORT}/api`);
-});
+// Iniciar servidor apenas se não estiver no Vercel
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+        console.log(`📊 API disponível em http://localhost:${PORT}/api`);
+    });
+}
 
 module.exports = app;
