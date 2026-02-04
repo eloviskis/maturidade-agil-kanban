@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Maturidade Ágil - Kanban</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Avaliação de Maturidade Ágil</h1>
+            <p>Metodologia Kanban - Sistema Multi-Avaliador com Histórico</p>
+        </div>
+
+        <div class="content">
+            <!-- Menu Principal -->
+            <div id="mainMenu" class="mode-selector">
+                <h2>Selecione o Modo de Operação</h2>
+                <div class="mode-buttons">
+                    <button class="btn-mode" onclick="app.showEvaluationForm()">
+                        📝 Fazer Avaliação<br>
+                        <small>Responder questionário</small>
+                    </button>
+                    <button class="btn-mode" onclick="app.showConsolidatedView()">
+                        📊 Ver Resultado Consolidado<br>
+                        <small>Média do time no ciclo</small>
+                    </button>
+                    <button class="btn-mode" onclick="app.showHistoryView()">
+                        📈 Ver Evolução Histórica<br>
+                        <small>Comparar ciclos</small>
+                    </button>
+                    <button class="btn-mode" onclick="app.showDashboard()">
+                        🎯 Dashboard Geral<br>
+                        <small>Todos os times</small>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Formulário de Avaliação -->
+            <div id="evaluationSection" style="display: none;">
+                <!-- Seletor de Tipo de Avaliação -->
+                <div class="evaluation-type-selector">
+                    <h3>Escolha o Tipo de Avaliação:</h3>
+                    <div class="type-buttons">
+                        <button class="btn-type active" data-type="kanban" onclick="app.switchEvaluationType('kanban')">
+                            📋 Avaliação Kanban<br>
+                            <small>24 questões focadas em Kanban</small>
+                        </button>
+                        <button class="btn-type" data-type="jornada" onclick="app.switchEvaluationType('jornada')">
+                            🧭 Jornada Ágil<br>
+                            <small>40 questões completas</small>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="team-info-section">
+                    <label for="teamSelect">Selecione o Time:</label>
+                    <select id="teamSelect">
+                        <option value="">-- Carregando times... --</option>
+                    </select>
+
+                    <label for="evaluatorName">Seu Nome:</label>
+                    <input type="text" id="evaluatorName" placeholder="Digite seu nome completo">
+
+                    <label for="cycleSelect">Ciclo de Avaliação:</label>
+                    <select id="cycleSelect">
+                        <option value="">-- Carregando ciclos... --</option>
+                    </select>
+
+                    <div class="info-box">
+                        <p>💡 <strong>Importante:</strong> Sua avaliação será salva no banco de dados e combinada com as avaliações de outros membros do time.</p>
+                    </div>
+                </div>
+
+                <div class="error-message" id="errorMessage"></div>
+
+                <div id="questionsContainer">
+                    <!-- As questões serão carregadas via JavaScript -->
+                </div>
+
+                <div class="submit-section">
+                    <button type="button" class="btn-submit" onclick="app.submitEvaluation()">💾 Salvar Minha Avaliação</button>
+                    <button type="button" class="btn-back" onclick="app.backToMenu()">🏠 Voltar</button>
+                </div>
+            </div>
+
+            <!-- Visualização Consolidada -->
+            <div id="consolidatedSection" style="display: none;">
+                <!-- Seletor de Tipo de Visualização -->
+                <div class="evaluation-type-selector">
+                    <h3>Tipo de Avaliação:</h3>
+                    <div class="type-buttons">
+                        <button class="btn-type active" data-type="kanban" onclick="app.switchViewType('kanban')">
+                            📋 Kanban (24 questões)
+                        </button>
+                        <button class="btn-type" data-type="jornada" onclick="app.switchViewType('jornada')">
+                            🧭 Jornada Ágil (40 questões)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="team-selector-section">
+                    <label for="viewTeamSelect">Selecione o Time:</label>
+                    <select id="viewTeamSelect" onchange="app.updateCyclesForView()">
+                        <option value="">-- Selecione um time --</option>
+                    </select>
+
+                    <label for="viewCycleSelect">Selecione o Ciclo:</label>
+                    <select id="viewCycleSelect" onchange="app.loadConsolidatedReport()">
+                        <option value="">-- Selecione um ciclo --</option>
+                    </select>
+
+                    <button class="btn-mode" onclick="app.loadConsolidatedReport()">📊 Carregar Relatório</button>
+                </div>
+
+                <div id="consolidatedReport"></div>
+
+                <div class="submit-section">
+                    <button class="btn-back" onclick="app.backToMenu()">🏠 Voltar ao Menu</button>
+                </div>
+            </div>
+
+            <!-- Visualização de Histórico -->
+            <div id="historySection" style="display: none;">
+                <div class="team-selector-section">
+                    <label for="historyTeamSelect">Selecione o Time:</label>
+                    <select id="historyTeamSelect" onchange="app.loadHistory()">
+                        <option value="">-- Selecione um time --</option>
+                    </select>
+
+                    <button class="btn-mode" onclick="app.loadHistory()">📈 Carregar Histórico</button>
+                </div>
+
+                <div id="historyReport"></div>
+
+                <div class="submit-section">
+                    <button class="btn-back" onclick="app.backToMenu()">🏠 Voltar ao Menu</button>
+                </div>
+            </div>
+
+            <!-- Dashboard Geral -->
+            <div id="dashboardSection" style="display: none;">
+                <div id="dashboardReport"></div>
+
+                <div class="submit-section">
+                    <button class="btn-back" onclick="app.backToMenu()">🏠 Voltar ao Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
