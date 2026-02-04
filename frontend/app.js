@@ -906,3 +906,10 @@ const app = {
                 ]
             }
         ];
+    }
+};
+
+// Inicializar app quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', () => {
+    app.init();
+});
