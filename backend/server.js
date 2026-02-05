@@ -17,6 +17,7 @@ const evaluationsRoutes = require('./routes/evaluations');
 const cyclesRoutes = require('./routes/cycles');
 const authRoutes = require('./routes/auth');
 const reportsRoutes = require('./routes/reports');
+const adminRoutes = require('./routes/admin');
 
 // Usar rotas
 app.use('/api/teams', teamsRoutes);
@@ -24,6 +25,7 @@ app.use('/api/evaluations', evaluationsRoutes);
 app.use('/api/cycles', cyclesRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/reports', reportsRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Rota raiz - servir frontend
 app.get('/', (req, res) => {

@@ -6,11 +6,13 @@ const API_BASE_URL = window.location.hostname === 'localhost'
 // Estado global da aplicação
 const app = {
     currentUser: null,
+    adminToken: null,
     teams: [],
     cycles: [],
     charts: {},
     currentEvaluationType: 'kanban', // 'kanban' ou 'jornada'
     currentViewType: 'kanban', // 'kanban' ou 'jornada'
+    currentAdminTab: 'evaluations',
     
     // Inicialização
     async init() {
@@ -747,12 +749,393 @@ const app = {
         document.getElementById('consolidatedSection').style.display = 'none';
         document.getElementById('historySection').style.display = 'none';
         document.getElementById('dashboardSection').style.display = 'none';
+        document.getElementById('adminLoginSection').style.display = 'none';
+        document.getElementById('adminPanelSection').style.display = 'none';
     },
 
     // Mostrar erro
     showError(message) {
         alert(message);
     },
+
+    // ==================== ÁREA ADMIN ====================
+
+    // Mostrar login admin
+    showAdminLogin() {
+        this.hideAllSections();
+        document.getElementById('adminLoginSection').style.display = 'block';
+        document.getElementById('adminLoginError').style.display = 'none';
+    },
+
+    // Login admin
+    async adminLogin() {
+        const email = document.getElementById('adminEmail').value.trim();
+        const password = document.getElementById('adminPassword').value;
+        const errorMsg = document.getElementById('adminLoginError');
+
+        errorMsg.style.display = 'none';
+
+        if (!email || !password) {
+            errorMsg.textContent = '⚠️ Preencha email e senha';
+            errorMsg.style.display = 'block';
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/admin/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (!response.ok) {
+                throw new Error('Credenciais inválidas');
+            }
+
+            const data = await response.json();
+            this.adminToken = data.token;
+            this.currentUser = data.user;
+
+            // Mostrar painel admin
+            this.showAdminPanel();
+        } catch (error) {
+            console.error('Erro no login:', error);
+            errorMsg.textContent = '❌ Email ou senha incorretos';
+            errorMsg.style.display = 'block';
+        }
+    },
+
+    // Logout admin
+    adminLogout() {
+        this.adminToken = null;
+        this.currentUser = null;
+        this.backToMenu();
+    },
+
+    // Mostrar painel admin
+    async showAdminPanel() {
+        this.hideAllSections();
+        document.getElementById('adminPanelSection').style.display = 'block';
+        
+        // Popular selects
+        this.populateAdminSelects();
+        
+        // Carregar tab ativa
+        this.showAdminTab(this.currentAdminTab);
+    },
+
+    // Popular selects admin
+    populateAdminSelects() {
+        const teamSelect = document.getElementById('adminParticipationTeam');
+        const cycleSelect = document.getElementById('adminParticipationCycle');
+        
+        if (teamSelect) {
+            teamSelect.innerHTML = '<option value="">-- Selecione um time --</option>';
+            this.teams.forEach(team => {
+                const option = document.createElement('option');
+                option.value = team.id;
+                option.textContent = team.name;
+                teamSelect.appendChild(option);
+            });
+        }
+        
+        if (cycleSelect) {
+            cycleSelect.innerHTML = '<option value="">-- Selecione um ciclo --</option>';
+            this.cycles.forEach(cycle => {
+                const option = document.createElement('option');
+                option.value = cycle.id;
+                option.textContent = cycle.name;
+                cycleSelect.appendChild(option);
+            });
+        }
+    },
+
+    // Mostrar tab admin
+    async showAdminTab(tabName) {
+        this.currentAdminTab = tabName;
+        
+        // Atualizar botões
+        document.querySelectorAll('.admin-tab').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event?.target?.classList.add('active');
+        
+        // Esconder todas as tabs
+        document.querySelectorAll('.admin-tab-content').forEach(tab => {
+            tab.style.display = 'none';
+        });
+        
+        // Mostrar tab selecionada
+        const tabContent = document.getElementById(`adminTab${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`);
+        if (tabContent) {
+            tabContent.style.display = 'block';
+        }
+        
+        // Carregar dados
+        if (tabName === 'evaluations') {
+            await this.loadAdminEvaluations();
+        } else if (tabName === 'stats') {
+            await this.loadAdminStats();
+        }
+    },
+
+    // Carregar avaliações (admin)
+    async loadAdminEvaluations() {
+        const container = document.getElementById('adminEvaluationsList');
+        container.innerHTML = '<div class="loading">Carregando avaliações...</div>';
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/admin/evaluations`, {
+                headers: { 'Authorization': `Bearer ${this.adminToken}` }
+            });
+
+            if (!response.ok) throw new Error('Erro ao carregar');
+
+            const evaluations = await response.json();
+
+            if (evaluations.length === 0) {
+                container.innerHTML = '<div class="info-box"><p>Nenhuma avaliação encontrada.</p></div>';
+                return;
+            }
+
+            let html = `
+                <div class="admin-evaluations-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Time</th>
+                                <th>Ciclo</th>
+                                <th>Avaliador</th>
+                                <th>Tipo</th>
+                                <th>Respostas</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            evaluations.forEach(ev => {
+                const date = new Date(ev.created_at).toLocaleString('pt-BR');
+                html += `
+                    <tr>
+                        <td>${ev.id}</td>
+                        <td>${ev.team_name}</td>
+                        <td>${ev.cycle_name}</td>
+                        <td>${ev.user_name}</td>
+                        <td>${ev.evaluation_type === 'kanban' ? '📋 Kanban' : '🧭 Jornada'}</td>
+                        <td>${ev.answers_count}</td>
+                        <td>${date}</td>
+                        <td>
+                            <button class="btn-delete-small" onclick="app.adminDeleteEvaluation(${ev.id})">🗑️</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        } catch (error) {
+            console.error('Erro:', error);
+            container.innerHTML = '<div class="error-message" style="display: block;">❌ Erro ao carregar avaliações</div>';
+        }
+    },
+
+    // Deletar avaliação específica
+    async adminDeleteEvaluation(id) {
+        if (!confirm('⚠️ Tem certeza que deseja deletar esta avaliação?\n\nEsta ação não pode ser desfeita.')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/admin/evaluations/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${this.adminToken}` }
+            });
+
+            if (!response.ok) throw new Error('Erro ao deletar');
+
+            alert('✅ Avaliação deletada com sucesso!');
+            await this.loadAdminEvaluations();
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('❌ Erro ao deletar avaliação');
+        }
+    },
+
+    // Zerar todas as avaliações
+    async adminDeleteAllEvaluations() {
+        const confirmation = prompt(
+            '⚠️⚠️⚠️ ATENÇÃO! ⚠️⚠️⚠️\n\n' +
+            'Você está prestes a DELETAR TODAS AS AVALIAÇÕES do banco de dados.\n\n' +
+            'Esta ação é IRREVERSÍVEL e apagará:\n' +
+            '- Todas as avaliações de todos os times\n' +
+            '- Todas as respostas\n' +
+            '- Todo o histórico\n\n' +
+            'Digite "ZERAR TUDO" para confirmar:'
+        );
+
+        if (confirmation !== 'ZERAR TUDO') {
+            alert('❌ Operação cancelada');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/admin/evaluations`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${this.adminToken}` }
+            });
+
+            if (!response.ok) throw new Error('Erro ao zerar');
+
+            alert('✅ Todas as avaliações foram deletadas com sucesso!');
+            await this.loadAdminEvaluations();
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('❌ Erro ao zerar avaliações');
+        }
+    },
+
+    // Carregar participação
+    async loadAdminParticipation() {
+        const teamId = document.getElementById('adminParticipationTeam').value;
+        const cycleId = document.getElementById('adminParticipationCycle').value;
+        const type = document.getElementById('adminParticipationType').value;
+        const container = document.getElementById('adminParticipationReport');
+
+        if (!teamId || !cycleId) {
+            container.innerHTML = '<div class="info-box"><p>Selecione time e ciclo</p></div>';
+            return;
+        }
+
+        container.innerHTML = '<div class="loading">Carregando...</div>';
+
+        try {
+            const url = `${API_BASE_URL}/admin/participation/${teamId}/${cycleId}${type ? `?type=${type}` : ''}`;
+            const response = await fetch(url, {
+                headers: { 'Authorization': `Bearer ${this.adminToken}` }
+            });
+
+            if (!response.ok) throw new Error('Erro ao carregar');
+
+            const data = await response.json();
+
+            let html = `
+                <div class="dashboard-header">
+                    <h3>👥 Relatório de Participação</h3>
+                    <div style="font-size: 1.5em; margin-top: 10px;">${data.team.name}</div>
+                    <div style="font-size: 1.2em; margin-top: 5px;">${data.cycle.name}</div>
+                    <div style="font-size: 1em; margin-top: 10px;">
+                        ${data.totalEvaluations} ${data.totalEvaluations === 1 ? 'pessoa avaliou' : 'pessoas avaliaram'}
+                    </div>
+                </div>
+            `;
+
+            if (data.evaluations.length === 0) {
+                html += '<div class="info-box"><p>Nenhuma avaliação encontrada</p></div>';
+            } else {
+                html += `
+                    <div class="admin-evaluations-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Avaliador</th>
+                                    <th>Email</th>
+                                    <th>Tipo</th>
+                                    <th>Respostas</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                data.evaluations.forEach(ev => {
+                    const date = new Date(ev.created_at).toLocaleString('pt-BR');
+                    html += `
+                        <tr>
+                            <td>${ev.evaluator_name}</td>
+                            <td>${ev.evaluator_email}</td>
+                            <td>${ev.evaluation_type === 'kanban' ? '📋 Kanban' : '🧭 Jornada'}</td>
+                            <td>${ev.answers_count}</td>
+                            <td>${date}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        } catch (error) {
+            console.error('Erro:', error);
+            container.innerHTML = '<div class="error-message" style="display: block;">❌ Erro ao carregar participação</div>';
+        }
+    },
+
+    // Carregar estatísticas
+    async loadAdminStats() {
+        const container = document.getElementById('adminStatsReport');
+        container.innerHTML = '<div class="loading">Carregando estatísticas...</div>';
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/admin/stats`, {
+                headers: { 'Authorization': `Bearer ${this.adminToken}` }
+            });
+
+            if (!response.ok) throw new Error('Erro ao carregar');
+
+            const stats = await response.json();
+
+            const html = `
+                <div class="dashboard-header">
+                    <h3>📊 Estatísticas Gerais</h3>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">${stats.total_evaluations || 0}</div>
+                        <div class="stat-label">Total de Avaliações</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${stats.teams_evaluated || 0}</div>
+                        <div class="stat-label">Times Avaliados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${stats.unique_evaluators || 0}</div>
+                        <div class="stat-label">Avaliadores Únicos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${stats.cycles_used || 0}</div>
+                        <div class="stat-label">Ciclos Utilizados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${stats.kanban_count || 0}</div>
+                        <div class="stat-label">Avaliações Kanban</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${stats.jornada_count || 0}</div>
+                        <div class="stat-label">Avaliações Jornada</div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        } catch (error) {
+            console.error('Erro:', error);
+            container.innerHTML = '<div class="error-message" style="display: block;">❌ Erro ao carregar estatísticas</div>';
+        }
+    },
+
+    // ==================== FIM ÁREA ADMIN ====================
 
     // Questões do formulário
     getQuestions() {

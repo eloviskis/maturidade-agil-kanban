@@ -35,6 +35,10 @@
                         🎯 Dashboard Geral<br>
                         <small>Todos os times</small>
                     </button>
+                    <button class="btn-mode" onclick="app.showAdminLogin()">
+                        🔐 Área Admin<br>
+                        <small>Gerenciar avaliações</small>
+                    </button>
                 </div>
             </div>
 
@@ -143,6 +147,81 @@
             <!-- Dashboard Geral -->
             <div id="dashboardSection" style="display: none;">
                 <div id="dashboardReport"></div>
+
+                <div class="submit-section">
+                    <button class="btn-back" onclick="app.backToMenu()">🏠 Voltar ao Menu</button>
+                </div>
+            </div>
+
+            <!-- Área Admin - Login -->
+            <div id="adminLoginSection" style="display: none;">
+                <div class="admin-login">
+                    <h2>🔐 Acesso Administrativo</h2>
+                    <div class="error-message" id="adminLoginError"></div>
+                    
+                    <div class="team-info-section">
+                        <label for="adminEmail">Email:</label>
+                        <input type="email" id="adminEmail" placeholder="admin@example.com" value="admin@example.com">
+
+                        <label for="adminPassword">Senha:</label>
+                        <input type="password" id="adminPassword" placeholder="Digite sua senha">
+                    </div>
+
+                    <div class="submit-section">
+                        <button class="btn-submit" onclick="app.adminLogin()">🔓 Entrar</button>
+                        <button class="btn-back" onclick="app.backToMenu()">🏠 Voltar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área Admin - Painel -->
+            <div id="adminPanelSection" style="display: none;">
+                <div class="admin-header">
+                    <h2>🛠️ Painel Administrativo</h2>
+                    <button class="btn-logout" onclick="app.adminLogout()">🚪 Sair</button>
+                </div>
+
+                <div class="admin-tabs">
+                    <button class="admin-tab active" onclick="app.showAdminTab('evaluations')">📋 Avaliações</button>
+                    <button class="admin-tab" onclick="app.showAdminTab('participation')">👥 Participação</button>
+                    <button class="admin-tab" onclick="app.showAdminTab('stats')">📊 Estatísticas</button>
+                </div>
+
+                <!-- Tab: Avaliações -->
+                <div id="adminTabEvaluations" class="admin-tab-content">
+                    <div class="admin-actions">
+                        <button class="btn-danger" onclick="app.adminDeleteAllEvaluations()">🗑️ Zerar Todas as Avaliações</button>
+                    </div>
+                    <div id="adminEvaluationsList"></div>
+                </div>
+
+                <!-- Tab: Participação -->
+                <div id="adminTabParticipation" class="admin-tab-content" style="display: none;">
+                    <div class="team-info-section">
+                        <label for="adminParticipationTeam">Time:</label>
+                        <select id="adminParticipationTeam" onchange="app.loadAdminParticipation()">
+                            <option value="">-- Selecione um time --</option>
+                        </select>
+
+                        <label for="adminParticipationCycle">Ciclo:</label>
+                        <select id="adminParticipationCycle" onchange="app.loadAdminParticipation()">
+                            <option value="">-- Selecione um ciclo --</option>
+                        </select>
+
+                        <label for="adminParticipationType">Tipo:</label>
+                        <select id="adminParticipationType" onchange="app.loadAdminParticipation()">
+                            <option value="">Todos</option>
+                            <option value="kanban">Kanban</option>
+                            <option value="jornada">Jornada Ágil</option>
+                        </select>
+                    </div>
+                    <div id="adminParticipationReport"></div>
+                </div>
+
+                <!-- Tab: Estatísticas -->
+                <div id="adminTabStats" class="admin-tab-content" style="display: none;">
+                    <div id="adminStatsReport"></div>
+                </div>
 
                 <div class="submit-section">
                     <button class="btn-back" onclick="app.backToMenu()">🏠 Voltar ao Menu</button>

@@ -73,8 +73,8 @@ INSERT INTO evaluation_cycles (name, start_date, end_date, description, is_activ
     ('Q4 2025', '2024-10-01', '2024-12-31', 'Quarto trimestre de 2025', true)
 ON CONFLICT DO NOTHING;
 
--- Inserir usuário admin padrão (senha: admin123)
--- Hash bcrypt para 'admin123': $2a$10$xQvJ5zGZ7xJ5v5v5v5v5v.5v5v5v5v5v5v5v5v5v5v5v5v5v5
+-- Inserir usuário admin padrão (senha: Pwk8q12v@)
+-- Hash bcrypt para 'Pwk8q12v@': $2a$10$u5QT3QahcjtK8SI6eBLPdO/sRPtn6W165PZexjQipuuhHuEzKKY6e
 INSERT INTO users (name, email, password_hash, role) VALUES
-    ('Administrador', 'admin@example.com', '$2a$10$xQvJ5zGZ7xJ5v5v5v5v5v.5v5v5v5v5v5v5v5v5v5v5v5v5v5', 'admin')
+    ('Administrador', 'admin@example.com', '$2a$10$u5QT3QahcjtK8SI6eBLPdO/sRPtn6W165PZexjQipuuhHuEzKKY6e', 'admin')
 ON CONFLICT (email) DO NOTHING;
