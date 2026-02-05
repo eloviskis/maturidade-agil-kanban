@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const db = require('../db');
 
 // Middleware de autenticação admin
 const requireAdmin = async (req, res, next) => {
@@ -13,7 +14,7 @@ const requireAdmin = async (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET || 'sua-chave-secreta-aqui');
         
-        const result = await req.db.query(
+        const result = await db.query(
             'SELECT id, email, role FROM users WHERE id = $1 AND role = $2',
             [decoded.userId, 'admin']
         );
@@ -36,7 +37,7 @@ router.post('/login', async (req, res) => {
         const { email, password } = req.body;
 
         // Buscar usuário admin
-        const result = await req.db.query(
+        const result = await db.query(
             'SELECT id, email, password_hash, role, name FROM users WHERE email = $1 AND role = $2',
             [email, 'admin']
         );
@@ -78,7 +79,7 @@ router.post('/login', async (req, res) => {
 // Listar todas as avaliações (com detalhes)
 router.get('/evaluations', requireAdmin, async (req, res) => {
     try {
-        const result = await req.db.query(`
+        const result = await db.query(`
             SELECT 
                 e.id,
                 e.evaluation_type,
@@ -110,13 +111,13 @@ router.delete('/evaluations/:id', requireAdmin, async (req, res) => {
         const { id } = req.params;
 
         // Verificar se existe
-        const check = await req.db.query('SELECT id FROM evaluations WHERE id = $1', [id]);
+        const check = await db.query('SELECT id FROM evaluations WHERE id = $1', [id]);
         if (check.rows.length === 0) {
             return res.status(404).json({ error: 'Avaliação não encontrada' });
         }
 
         // Deletar (cascade vai deletar as respostas também)
-        await req.db.query('DELETE FROM evaluations WHERE id = $1', [id]);
+        await db.query('DELETE FROM evaluations WHERE id = $1', [id]);
 
         res.json({ message: 'Avaliação deletada com sucesso' });
     } catch (error) {
@@ -129,8 +130,8 @@ router.delete('/evaluations/:id', requireAdmin, async (req, res) => {
 router.delete('/evaluations', requireAdmin, async (req, res) => {
     try {
         // Primeiro deletar respostas, depois avaliações
-        await req.db.query('DELETE FROM evaluation_answers');
-        await req.db.query('DELETE FROM evaluations');
+        await db.query('DELETE FROM evaluation_answers');
+        await db.query('DELETE FROM evaluations');
 
         res.json({ message: 'Todas as avaliações foram deletadas com sucesso' });
     } catch (error) {
@@ -146,7 +147,7 @@ router.get('/participation/:teamId/:cycleId', requireAdmin, async (req, res) => 
         const { type } = req.query; // 'kanban' ou 'jornada'
 
         // Buscar avaliações do time/ciclo
-        const evaluationsResult = await req.db.query(`
+        const evaluationsResult = await db.query(`
             SELECT 
                 e.id,
                 e.evaluation_type,
@@ -164,8 +165,8 @@ router.get('/participation/:teamId/:cycleId', requireAdmin, async (req, res) => 
         `, type ? [teamId, cycleId, type] : [teamId, cycleId]);
 
         // Buscar info do time e ciclo
-        const teamResult = await req.db.query('SELECT name FROM teams WHERE id = $1', [teamId]);
-        const cycleResult = await req.db.query('SELECT name FROM evaluation_cycles WHERE id = $1', [cycleId]);
+        const teamResult = await db.query('SELECT name FROM teams WHERE id = $1', [teamId]);
+        const cycleResult = await db.query('SELECT name FROM evaluation_cycles WHERE id = $1', [cycleId]);
 
         res.json({
             team: teamResult.rows[0],
@@ -182,7 +183,7 @@ router.get('/participation/:teamId/:cycleId', requireAdmin, async (req, res) => 
 // Estatísticas gerais
 router.get('/stats', requireAdmin, async (req, res) => {
     try {
-        const stats = await req.db.query(`
+        const stats = await db.query(`
             SELECT 
                 COUNT(DISTINCT e.id) as total_evaluations,
                 COUNT(DISTINCT e.team_id) as teams_evaluated,
@@ -201,3 +202,4 @@ router.get('/stats', requireAdmin, async (req, res) => {
 });
 
 module.exports = router;
+
