@@ -235,17 +235,11 @@ body {
     font-size: 18px;
     margin-left: 8px;
     cursor: help;
-    position: relative;
     vertical-align: middle;
 }
 
-.tooltip-icon:hover::after {
-    content: attr(title);
-    position: absolute;
-    left: 50%;
-    bottom: 100%;
-    transform: translateX(-50%);
-    margin-bottom: 8px;
+.tooltip-box {
+    position: fixed;
     padding: 12px 16px;
     background: #2d3748;
     color: white;
@@ -253,23 +247,19 @@ body {
     font-size: 14px;
     font-weight: normal;
     white-space: normal;
-    width: 300px;
+    width: 320px;
     max-width: 90vw;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    z-index: 10000;
     line-height: 1.5;
     text-align: left;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
-.tooltip-icon:hover::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 100%;
-    transform: translateX(-50%);
-    border: 6px solid transparent;
-    border-top-color: #2d3748;
-    z-index: 1001;
+.tooltip-box.visible {
+    opacity: 1;
 }
 
 .options {

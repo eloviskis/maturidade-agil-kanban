@@ -145,7 +145,7 @@ const app = {
                 questionDiv.className = 'question';
                 questionDiv.setAttribute('data-question', q.id);
                 
-                const tooltipHtml = q.tooltip ? `<span class="tooltip-icon" title="${q.tooltip}">💡</span>` : '';
+                const tooltipHtml = q.tooltip ? `<span class="tooltip-icon" data-tooltip="${q.tooltip.replace(/"/g, '&quot;')}">💡</span>` : '';
                 
                 questionDiv.innerHTML = `
                     <div class="question-text">
@@ -164,6 +164,44 @@ const app = {
 
         // Adicionar event listeners
         this.addQuestionEventListeners();
+        this.initTooltips();
+    },
+
+    // Inicializar tooltips com posicionamento fixo
+    initTooltips() {
+        let tooltipBox = document.getElementById('tooltipBox');
+        if (!tooltipBox) {
+            tooltipBox = document.createElement('div');
+            tooltipBox.id = 'tooltipBox';
+            tooltipBox.className = 'tooltip-box';
+            document.body.appendChild(tooltipBox);
+        }
+
+        document.querySelectorAll('.tooltip-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', (e) => {
+                const text = e.target.getAttribute('data-tooltip');
+                tooltipBox.textContent = text;
+                tooltipBox.classList.add('visible');
+
+                const rect = e.target.getBoundingClientRect();
+                let top = rect.bottom + 8;
+                let left = rect.left - 140;
+
+                // Não ultrapassar bordas da tela
+                if (left < 10) left = 10;
+                if (left + 320 > window.innerWidth) left = window.innerWidth - 330;
+                if (top + 100 > window.innerHeight) {
+                    top = rect.top - tooltipBox.offsetHeight - 8;
+                }
+
+                tooltipBox.style.top = top + 'px';
+                tooltipBox.style.left = left + 'px';
+            });
+
+            icon.addEventListener('mouseleave', () => {
+                tooltipBox.classList.remove('visible');
+            });
+        });
     },
 
     // Criar opções de resposta
