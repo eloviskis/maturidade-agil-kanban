@@ -1148,60 +1148,156 @@ const app = {
                 icon: '📋',
                 title: 'Práticas Kanban',
                 questions: [
-                    { id: 1, text: 'O time possui um quadro Kanban visível e atualizado com todas as etapas do fluxo de trabalho' },
-                    { id: 2, text: 'O time estabelece e respeita os limites de WIP (Work In Progress) para cada coluna do quadro' },
-                    { id: 3, text: 'O fluxo de trabalho no quadro Kanban reflete com precisão o processo real do time' },
-                    { id: 4, text: 'O time realiza reuniões de reposição (replenishment) regulares para priorizar o backlog' }
+                    { 
+                        id: 1, 
+                        text: 'O time possui um quadro Kanban visível e atualizado com todas as etapas do fluxo de trabalho',
+                        tooltip: 'Quadro visível é a base do Kanban. Se ninguém olha ou não reflete a realidade, vira decoração inútil.'
+                    },
+                    { 
+                        id: 2, 
+                        text: 'O time estabelece e respeita os limites de WIP (Work In Progress) para cada coluna do quadro',
+                        tooltip: 'WIP limitado força foco e finalização. Sem limite, vira bagunça com tudo começado e nada terminado.'
+                    },
+                    { 
+                        id: 3, 
+                        text: 'O fluxo de trabalho no quadro Kanban reflete com precisão o processo real do time',
+                        tooltip: 'Quadro que não reflete a realidade é mentira visual. Precisa ser o espelho do que realmente acontece.'
+                    },
+                    { 
+                        id: 4, 
+                        text: 'O time realiza reuniões de reposição (replenishment) regulares para priorizar o backlog',
+                        tooltip: 'Replenishment evita time parado sem trabalho ou pegando coisa errada. É sobre ter sempre a coisa certa pra fazer.'
+                    }
                 ]
             },
             {
                 icon: '🌊',
                 title: 'Gestão de Fluxo',
                 questions: [
-                    { id: 5, text: 'O time monitora e analisa o tempo de ciclo (cycle time) das tarefas regularmente' },
-                    { id: 6, text: 'O time identifica e remove impedimentos que bloqueiam o fluxo de trabalho rapidamente' },
-                    { id: 7, text: 'O time utiliza classes de serviço para diferenciar tipos de trabalho e suas prioridades' },
-                    { id: 8, text: 'O time possui políticas explícitas para quando puxar novo trabalho' }
+                    { 
+                        id: 5, 
+                        text: 'O time monitora e analisa o tempo de ciclo (cycle time) das tarefas regularmente',
+                        tooltip: 'Cycle time mostra quanto tempo leva pra entregar. Monitorar isso ajuda a prever e melhorar.'
+                    },
+                    { 
+                        id: 6, 
+                        text: 'O time identifica e remove impedimentos que bloqueiam o fluxo de trabalho rapidamente',
+                        tooltip: 'Impedimento ignorado é dinheiro perdido. Quanto mais rápido resolve, mais rápido entrega valor.'
+                    },
+                    { 
+                        id: 7, 
+                        text: 'O time utiliza classes de serviço para diferenciar tipos de trabalho e suas prioridades',
+                        tooltip: 'Nem tudo é urgente, mas algumas coisas são. Classes de serviço ajudam a tratar cada tipo do jeito certo.'
+                    },
+                    { 
+                        id: 8, 
+                        text: 'O time possui políticas explícitas para quando puxar novo trabalho',
+                        tooltip: 'Política clara evita gente pegando trabalho na hora errada. Todo mundo sabe quando pode puxar mais coisa.'
+                    }
                 ]
             },
             {
                 icon: '📊',
                 title: 'Métricas e Melhoria Contínua',
                 questions: [
-                    { id: 9, text: 'O time coleta e analisa métricas de throughput (vazão) regularmente' },
-                    { id: 10, text: 'O time realiza retrospectivas regulares para identificar oportunidades de melhoria' },
-                    { id: 11, text: 'O time utiliza diagramas de fluxo cumulativo (CFD) para visualizar tendências' },
-                    { id: 12, text: 'As melhorias identificadas são implementadas e seus resultados são medidos' }
+                    { 
+                        id: 9, 
+                        text: 'O time coleta e analisa métricas de throughput (vazão) regularmente',
+                        tooltip: 'Throughput é quantas coisas você entrega. Medir isso mostra se tá melhorando ou piorando.'
+                    },
+                    { 
+                        id: 10, 
+                        text: 'O time realiza retrospectivas regulares para identificar oportunidades de melhoria',
+                        tooltip: 'Retro não é reclamação, é melhoria. Parar pra pensar no que pode ser melhor faz você evoluir de verdade.'
+                    },
+                    { 
+                        id: 11, 
+                        text: 'O time utiliza diagramas de fluxo cumulativo (CFD) para visualizar tendências',
+                        tooltip: 'CFD é raio-x do fluxo. Mostra gargalos, acúmulos e problemas que você não vê só olhando o quadro.'
+                    },
+                    { 
+                        id: 12, 
+                        text: 'As melhorias identificadas são implementadas e seus resultados são medidos',
+                        tooltip: 'Melhoria sem implementação é papo furado. E sem medir, você não sabe se funcionou ou foi perda de tempo.'
+                    }
                 ]
             },
             {
                 icon: '👥',
                 title: 'Colaboração e Comunicação',
                 questions: [
-                    { id: 13, text: 'O time realiza daily standups focados no fluxo de trabalho e não em status individual' },
-                    { id: 14, text: 'Há transparência total sobre o trabalho em andamento para todos os membros do time' },
-                    { id: 15, text: 'O time colabora ativamente para desbloquear itens parados ou com problemas' },
-                    { id: 16, text: 'Existe um bom alinhamento entre o time e os stakeholders sobre prioridades' }
+                    { 
+                        id: 13, 
+                        text: 'O time realiza daily standups focados no fluxo de trabalho e não em status individual',
+                        tooltip: 'Daily boa foca no trabalho, não nas pessoas. É sobre desbloquear e fazer fluir, não reportar pra chefe.'
+                    },
+                    { 
+                        id: 14, 
+                        text: 'Há transparência total sobre o trabalho em andamento para todos os membros do time',
+                        tooltip: 'Transparência elimina surpresas e permite ajuda mútua. Esconder trabalho só gera problema depois.'
+                    },
+                    { 
+                        id: 15, 
+                        text: 'O time colabora ativamente para desbloquear itens parados ou com problemas',
+                        tooltip: 'Item parado é desperdício. Time que se ajuda desbloqueia rápido e entrega mais.'
+                    },
+                    { 
+                        id: 16, 
+                        text: 'Existe um bom alinhamento entre o time e os stakeholders sobre prioridades',
+                        tooltip: 'Trabalhar na coisa errada é o maior desperdício. Alinhamento garante que você tá fazendo o que importa.'
+                    }
                 ]
             },
             {
                 icon: '⚙️',
                 title: 'Qualidade e Práticas Técnicas',
                 questions: [
-                    { id: 17, text: 'O time possui definição clara de "pronto" (Definition of Done) para cada item' },
-                    { id: 18, text: 'O time pratica integração contínua e testes automatizados' },
-                    { id: 19, text: 'Code reviews são realizados como parte do fluxo de trabalho' },
-                    { id: 20, text: 'O time trata a dívida técnica de forma proativa e sistemática' }
+                    { 
+                        id: 17, 
+                        text: 'O time possui definição clara de "pronto" (Definition of Done) para cada item',
+                        tooltip: 'DoD evita "99% pronto". Todo mundo sabe exatamente o que precisa pra considerar algo realmente terminado.'
+                    },
+                    { 
+                        id: 18, 
+                        text: 'O time pratica integração contínua e testes automatizados',
+                        tooltip: 'CI e testes automatizados pegam bugs cedo. Quanto antes descobrir, mais barato é consertar.'
+                    },
+                    { 
+                        id: 19, 
+                        text: 'Code reviews são realizados como parte do fluxo de trabalho',
+                        tooltip: 'Code review espalha conhecimento e melhora qualidade. Não é inspeção, é aprendizado colaborativo.'
+                    },
+                    { 
+                        id: 20, 
+                        text: 'O time trata a dívida técnica de forma proativa e sistemática',
+                        tooltip: 'Dívida técnica ignorada vira juros altos depois. Tratar com seriedade evita código podre que trava tudo.'
+                    }
                 ]
             },
             {
                 icon: '🔄',
                 title: 'Adaptação e Evolução',
                 questions: [
-                    { id: 21, text: 'O time revisa e ajusta os limites de WIP baseado em dados e experiência' },
-                    { id: 22, text: 'O processo Kanban é revisado e evoluído regularmente com base em feedback' },
-                    { id: 23, text: 'O time experimenta com novas práticas e ferramentas para melhorar o fluxo' },
-                    { id: 24, text: 'O time possui cultura de aprendizado contínuo e compartilhamento de conhecimento' }
+                    { 
+                        id: 21, 
+                        text: 'O time revisa e ajusta os limites de WIP baseado em dados e experiência',
+                        tooltip: 'WIP não é dogma, é experimento. Ajustar baseado em dados faz o fluxo melhorar constantemente.'
+                    },
+                    { 
+                        id: 22, 
+                        text: 'O processo Kanban é revisado e evoluído regularmente com base em feedback',
+                        tooltip: 'Processo engessado envelhece mal. Evoluir com base em feedback mantém relevância e eficácia.'
+                    },
+                    { 
+                        id: 23, 
+                        text: 'O time experimenta com novas práticas e ferramentas para melhorar o fluxo',
+                        tooltip: 'Experimentar é aprender. Times que testam coisas novas descobrem jeitos melhores de trabalhar.'
+                    },
+                    { 
+                        id: 24, 
+                        text: 'O time possui cultura de aprendizado contínuo e compartilhamento de conhecimento',
+                        tooltip: 'Conhecimento guardado é conhecimento desperdiçado. Compartilhar faz o time todo evoluir junto.'
+                    }
                 ]
             }
         ];
