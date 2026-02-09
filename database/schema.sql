@@ -68,9 +68,12 @@ INSERT INTO teams (name, description) VALUES
     ('Castelini', 'Time Castelini')
 ON CONFLICT (name) DO NOTHING;
 
--- Inserir ciclo atual (exemplo)
+-- Inserir ciclos de 2026
 INSERT INTO evaluation_cycles (name, start_date, end_date, description, is_active) VALUES
-    ('Q4 2025', '2024-10-01', '2024-12-31', 'Quarto trimestre de 2025', true)
+    ('Q1 2026', '2026-01-01', '2026-03-31', 'Primeiro trimestre de 2026', true),
+    ('Q2 2026', '2026-04-01', '2026-06-30', 'Segundo trimestre de 2026', true),
+    ('Q3 2026', '2026-07-01', '2026-09-30', 'Terceiro trimestre de 2026', true),
+    ('Q4 2026', '2026-10-01', '2026-12-31', 'Quarto trimestre de 2026', true)
 ON CONFLICT DO NOTHING;
 
 -- Inserir usuário admin padrão (senha: Pwk8q12v@)
