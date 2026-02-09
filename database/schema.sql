@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS evaluations (
     team_id INTEGER NOT NULL REFERENCES teams(id) ON DELETE CASCADE,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     cycle_id INTEGER NOT NULL REFERENCES evaluation_cycles(id) ON DELETE CASCADE,
-    evaluation_type VARCHAR(20) DEFAULT 'kanban', -- 'kanban' (24 questões) ou 'jornada' (40 questões)
+    evaluation_type VARCHAR(20) DEFAULT 'kanban', -- 'kanban' (24 questões) ou 'jornada' (34 questões)
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
