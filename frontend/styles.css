@@ -224,6 +224,52 @@ body {
     font-weight: 500;
     color: #333;
     margin-bottom: 15px;
+    position: relative;
+}
+
+/* Tooltip Styles */
+.tooltip-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+    margin-left: 8px;
+    cursor: help;
+    position: relative;
+    vertical-align: middle;
+}
+
+.tooltip-icon:hover::after {
+    content: attr(title);
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    padding: 12px 16px;
+    background: #2d3748;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: normal;
+    white-space: normal;
+    width: 300px;
+    max-width: 90vw;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.tooltip-icon:hover::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #2d3748;
+    z-index: 1001;
 }
 
 .options {

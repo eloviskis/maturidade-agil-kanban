@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS evaluations (
 CREATE TABLE IF NOT EXISTS evaluation_answers (
     id SERIAL PRIMARY KEY,
     evaluation_id INTEGER NOT NULL REFERENCES evaluations(id) ON DELETE CASCADE,
-    question_number INTEGER NOT NULL CHECK (question_number BETWEEN 1 AND 40),
+    question_number INTEGER NOT NULL CHECK (question_number >= 1),
     answer_value INTEGER NOT NULL CHECK (answer_value BETWEEN 1 AND 5),
     UNIQUE(evaluation_id, question_number)
 );

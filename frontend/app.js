@@ -145,8 +145,12 @@ const app = {
                 questionDiv.className = 'question';
                 questionDiv.setAttribute('data-question', q.id);
                 
+                const tooltipHtml = q.tooltip ? `<span class="tooltip-icon" title="${q.tooltip}">💡</span>` : '';
+                
                 questionDiv.innerHTML = `
-                    <div class="question-text">${q.id}. ${q.text}</div>
+                    <div class="question-text">
+                        ${q.id}. ${q.text} ${tooltipHtml}
+                    </div>
                     <div class="options">
                         ${this.createOptions(q.id)}
                     </div>
@@ -235,7 +239,7 @@ const app = {
         // Coletar respostas
         const answers = {};
         let unanswered = [];
-        const totalQuestions = this.currentEvaluationType === 'kanban' ? 24 : 40;
+        const totalQuestions = this.currentEvaluationType === 'kanban' ? 24 : 34;
 
         for (let i = 1; i <= totalQuestions; i++) {
             const radio = document.querySelector(`input[name="q${i}"]:checked`);
@@ -1203,89 +1207,219 @@ const app = {
         ];
     },
 
-    // Questões da Jornada Ágil (40 questões)
+    // Questões da Jornada Ágil (34 questões)
     getJornadaAgilQuestions() {
         return [
             {
                 icon: '🔹',
                 title: 'Dinâmica da Equipe',
                 questions: [
-                    { id: 1, text: 'Mentalidade Ágil: A equipe compreende, acredita e pratica os valores e princípios ágeis no dia a dia, buscando aprendizado, adaptação e melhoria contínua' },
-                    { id: 2, text: 'Moral da Equipe: Há bom nível de engajamento, satisfação, confiança e bem-estar das pessoas que compõem a equipe' },
-                    { id: 3, text: 'Trabalho em Equipe: A equipe demonstra colaboração, confiança mútua, ajuda entre os membros e senso de responsabilidade coletiva pelos resultados' },
-                    { id: 4, text: 'Estágios de Desenvolvimento (Tuckman): A equipe apresenta maturidade e estabilidade em termos de formação, conflitos, alinhamento e performance consistente' },
-                    { id: 5, text: 'Ritmo Sustentável: A equipe trabalha de forma equilibrada e sustentável ao longo do tempo, evitando sobrecarga contínua e desgaste' },
-                    { id: 6, text: 'Acordo de Trabalho: A equipe possui acordos claros, explícitos e compartilhados sobre como trabalhar, colaborar, tomar decisões e manter o ritmo saudável' }
+                    { 
+                        id: 1, 
+                        text: 'Mentalidade Ágil: A equipe compreende, acredita e pratica os valores e princípios ágeis no dia a dia, buscando aprendizado, adaptação e melhoria contínua',
+                        tooltip: 'Isso mostra se a galera realmente abraçou o ágil ou se é só papo. Times com mentalidade ágil de verdade se adaptam mais rápido e entregam melhor.' 
+                    },
+                    { 
+                        id: 2, 
+                        text: 'Moral da Equipe: Há bom nível de engajamento, satisfação, confiança e bem-estar das pessoas que compõem a equipe',
+                        tooltip: 'Time feliz produz mais e melhor. Se a moral tá baixa, a produtividade despenca. É sobre cuidar das pessoas primeiro.'
+                    },
+                    { 
+                        id: 3, 
+                        text: 'Trabalho em Equipe: A equipe demonstra colaboração, confiança mútua, ajuda entre os membros e senso de responsabilidade coletiva pelos resultados',
+                        tooltip: 'Aqui você vê se é um time de verdade ou só um bando de pessoas trabalhando junto. Colaboração genuína faz toda diferença.'
+                    },
+                    { 
+                        id: 4, 
+                        text: 'Estágios de Desenvolvimento (Tuckman): A equipe apresenta maturidade e estabilidade em termos de formação, conflitos, alinhamento e performance consistente',
+                        tooltip: 'Times passam por fases: formação, conflito, normalização e performance. Quanto mais maduro, mais eficiente e menos drama.'
+                    },
+                    { 
+                        id: 5, 
+                        text: 'Ritmo Sustentável: A equipe trabalha de forma equilibrada e sustentável ao longo do tempo, evitando sobrecarga contínua e desgaste',
+                        tooltip: 'Maratona não é sprint. Ritmo sustentável evita burnout e mantém qualidade. Correria constante queima o time.'
+                    },
+                    { 
+                        id: 6, 
+                        text: 'Acordo de Trabalho: A equipe possui acordos claros, explícitos e compartilhados sobre como trabalhar, colaborar, tomar decisões e manter o ritmo saudável',
+                        tooltip: 'Combinados claros fazem todo mundo saber o que esperar. Evita conflito e deixa o trabalho fluir melhor.'
+                    }
                 ]
             },
             {
                 icon: '🏢',
                 title: 'Ambiente da Equipe',
                 questions: [
-                    { id: 7, text: 'Tamanho da Equipe: O tamanho da equipe favorece comunicação eficaz, colaboração e entrega contínua de valor' },
-                    { id: 8, text: 'Dedicação da Equipe: Os membros possuem foco e dedicação à equipe e ao fluxo de trabalho, evitando multitarefa excessiva entre times ou projetos' },
-                    { id: 9, text: 'Continuidade da Equipe: A composição da equipe é estável ao longo do tempo, favorecendo aprendizado coletivo e melhoria contínua' },
-                    { id: 10, text: 'Multifuncionalidade: A equipe possui, internamente, todas as habilidades necessárias para entregar valor de ponta a ponta, com compartilhamento de conhecimento' },
-                    { id: 11, text: 'Local de Trabalho/Proximidade: A configuração física ou virtual favorece comunicação rápida, colaboração e resolução eficiente de problemas' }
+                    { 
+                        id: 7, 
+                        text: 'Tamanho da Equipe: O tamanho da equipe favorece comunicação eficaz, colaboração e entrega contínua de valor',
+                        tooltip: 'Nem muito grande(muita gente, pouca comunicação) nem muito pequeno (falta skill). O ideal é entre 5-9 pessoas.'
+                    },
+                    { 
+                        id: 8, 
+                        text: 'Dedicação da Equipe: Os membros possuem foco e dedicação à equipe e ao fluxo de trabalho, evitando multitarefa excessiva entre times ou projetos',
+                        tooltip: 'Multitarefa extrema mata produtividade. Pessoas dedicadas ao time entregam mais e com mais qualidade.'
+                    },
+                    { 
+                        id: 9, 
+                        text: 'Continuidade da Equipe: A composição da equipe é estável ao longo do tempo, favorecendo aprendizado coletivo e melhoria contínua',
+                        tooltip: 'Time que fica junto aprende junto e evolui junto. Rotatividade alta prejudica evolução e conhecimento.'
+                    },
+                    { 
+                        id: 10, 
+                        text: 'Multifuncionalidade: A equipe possui, internamente, todas as habilidades necessárias para entregar valor de ponta a ponta, com compartilhamento de conhecimento',
+                        tooltip: 'Time autônomo não depende de outros times pra entregar. Compartilhar conhecimento evita gargalos e "donos" de código.'
+                    },
+                    { 
+                        id: 11, 
+                        text: 'Local de Trabalho/Proximidade: A configuração física ou virtual favorece comunicação rápida, colaboração e resolução eficiente de problemas',
+                        tooltip: 'Seja remoto ou presencial, o importante é facilitar conversa rápida. Comunicação travada = trabalho travado.'
+                    }
                 ]
             },
             {
                 icon: '🎯',
                 title: 'Organização e Cultura',
                 questions: [
-                    { id: 12, text: 'Auto-organização: A equipe possui autonomia para decidir como organizar o trabalho, assumir demandas, colaborar e entregar valor' },
-                    { id: 13, text: 'Gestão de Impedimentos: Impedimentos são identificados, comunicados, analisados e resolvidos de forma consistente e sistêmica' }
+                    { 
+                        id: 12, 
+                        text: 'Auto-organização: A equipe possui autonomia para decidir como organizar o trabalho, assumir demandas, colaborar e entregar valor',
+                        tooltip: 'Time que se auto-organiza é mais engajado e toma melhores decisões. Microgerenciamento mata criatividade e ownership.'
+                    },
+                    { 
+                        id: 13, 
+                        text: 'Gestão de Impedimentos: Impedimentos são identificados, comunicados, analisados e resolvidos de forma consistente e sistêmica',
+                        tooltip: 'Impedimento não resolvido vira bloqueio. Aqui se vê se a empresa ajuda o time ou só cobra resultado.'
+                    }
                 ]
             },
             {
                 icon: '⚙️',
                 title: 'Mecânica dos Processos Ágeis',
                 questions: [
-                    { id: 14, text: 'Reunião Diária: A equipe utiliza reuniões diárias para inspecionar o fluxo de trabalho, alinhar prioridades, identificar bloqueios e tomar ações rápidas' },
-                    { id: 15, text: 'Retrospectiva e Kaizen: A equipe possui momentos estruturados para refletir sobre processos, relações e resultados, implementando melhorias contínuas' },
-                    { id: 16, text: 'Trabalho Orientado a Valor: O trabalho da equipe é orientado à entrega de valor para usuários ou stakeholders' },
-                    { id: 17, text: 'Previsibilidade e Compromisso: A equipe compreende sua capacidade real de entrega, utiliza dados históricos ou métricas de fluxo e assume compromissos realistas' },
-                    { id: 18, text: 'Acompanhamento do Trabalho (WIP): A equipe acompanha o progresso do trabalho em andamento, tornando-o visível e utilizando essas informações para melhorar o fluxo' },
-                    { id: 19, text: 'Revisão e Feedback: A equipe revisa entregas concluídas com stakeholders de forma frequente, coletando feedback e ajustando expectativas' }
+                    { 
+                        id: 14, 
+                        text: 'Reunião Diária: A equipe utiliza reuniões diárias para inspecionar o fluxo de trabalho, alinhar prioridades, identificar bloqueios e tomar ações rápidas',
+                        tooltip: 'Daily eficaz é rápida e focada no trabalho, não em status report. Serve pra desbloquear, não pra controlar.'
+                    },
+                    { 
+                        id: 15, 
+                        text: 'Retrospectiva e Kaizen: A equipe possui momentos estruturados para refletir sobre processos, relações e resultados, implementando melhorias contínuas',
+                        tooltip: 'Retro não é pra reclamar e esquecer. É pra identificar problemas e resolver de verdade. Melhoria contínua na veia.'
+                    },
+                    { 
+                        id: 16, 
+                        text: 'Trabalho Orientado a Valor: O trabalho da equipe é orientado à entrega de valor para usuários ou stakeholders',
+                        tooltip: 'Não adianta trabalhar muito se não gera valor. Foco no que importa pro usuário final, não em features bonitas.'
+                    },
+                    { 
+                        id: 17, 
+                        text: 'Previsibilidade e Compromisso: A equipe compreende sua capacidade real de entrega, utiliza dados históricos ou métricas de fluxo e assume compromissos realistas',
+                        tooltip: 'Prometer com base em dados é melhor que "achismo". Previsibilidade gera confiança e evita frustração.'
+                    },
+                    { 
+                        id: 18, 
+                        text: 'Acompanhamento do Trabalho (WIP): A equipe acompanha o progresso do trabalho em andamento, tornando-o visível e utilizando essas informações para melhorar o fluxo',
+                        tooltip: 'Visibilidade do trabalho ajuda a identificar gargalos e distribuir melhor as tarefas. Quadro não é decoração.'
+                    },
+                    { 
+                        id: 19, 
+                        text: 'Revisão e Feedback: A equipe revisa entregas concluídas com stakeholders de forma frequente, coletando feedback e ajustando expectativas',
+                        tooltip: 'Feedback cedo evita trabalho jogado fora. Quanto antes mostrar, mais rápido corrige o rumo se precisar.'
+                    }
                 ]
             },
             {
                 icon: '📦',
                 title: 'Produto',
                 questions: [
-                    { id: 20, text: 'Previsibilidade de Entrega: A equipe mede e melhora continuamente o tempo entre o início e a conclusão do trabalho, aumentando confiabilidade das entregas' },
-                    { id: 21, text: 'Estratégia de Produto (Nível Estratégico): Há alinhamento entre visão estratégica de produto e o trabalho realizado pela equipe' },
-                    { id: 22, text: 'Gestão de Produto (Nível da Equipe): Existe um papel claro responsável por priorizar demandas, maximizar valor, esclarecer requisitos e aceitar entregas' },
-                    { id: 23, text: 'Tempo de Ciclo: A equipe tem capacidade de reduzir o tempo total entre a concepção de uma demanda e sua disponibilização para uso real' },
-                    { id: 24, text: 'Visão do Produto: Existe uma visão clara, compartilhada e compreendida do produto, orientando decisões e prioridades' }
+                    { 
+                        id: 20, 
+                        text: 'Previsibilidade de Entrega: A equipe mede e melhora continuamente o tempo entre o início e a conclusão do trabalho, aumentando confiabilidade das entregas',
+                        tooltip: 'Saber quanto tempo leva pra entregar algo ajuda a planejar melhor e não prometer o impossível.'
+                    },
+                    { 
+                        id: 21, 
+                        text: 'Estratégia de Produto (Nível Estratégico): Há alinhamento entre visão estratégica de produto e o trabalho realizado pela equipe',
+                        tooltip: 'Time trabalhando sem saber o porquê é como remar sem direção. Alinhamento estratégico dá propósito ao trabalho.'
+                    },
+                    { 
+                        id: 22, 
+                        text: 'Gestão de Produto (Nível da Equipe): Existe um papel claro responsável por priorizar demandas, maximizar valor, esclarecer requisitos e aceitar entregas',
+                        tooltip: 'Alguém precisa decidir o que é mais importante. PO claro evita time perdido com coisa errada.'
+                    },
+                    { 
+                        id: 23, 
+                        text: 'Tempo de Ciclo: A equipe tem capacidade de reduzir o tempo total entre a concepção de uma demanda e sua disponibilização para uso real',
+                        tooltip: 'Quanto mais rápido da ideia ao usuário usando, mais rápido você aprende e ajusta. Velocidade gera aprendizado.'
+                    },
+                    { 
+                        id: 24, 
+                        text: 'Visão do Produto: Existe uma visão clara, compartilhada e compreendida do produto, orientando decisões e prioridades',
+                        tooltip: 'Visão clara é como bússola do time. Todo mundo sabe pra onde tá indo e por quê.'
+                    }
                 ]
             },
             {
                 icon: '✅',
                 title: 'Qualidade dos Itens de Trabalho',
                 questions: [
-                    { id: 25, text: 'Qualidade e Clareza: Os itens de trabalho são claros, bem definidos, pequenos o suficiente e compreensíveis antes de entrarem no fluxo' },
-                    { id: 26, text: 'Políticas de Entrada: A equipe possui critérios claros que determinam quando um item está pronto para iniciar o trabalho' },
-                    { id: 27, text: 'Políticas de Conclusão (Definition of Done): A equipe possui critérios claros e compartilhados que definem quando um trabalho é considerado concluído' },
-                    { id: 28, text: 'Tamanho dos Itens: Os itens de trabalho são fatiados de forma adequada para permitir entrega frequente e aprendizado rápido' },
-                    { id: 29, text: 'Replenishment e Preparação: A equipe possui práticas regulares para revisar, priorizar e preparar novos itens antes de entrarem no fluxo' },
-                    { id: 30, text: 'Corte Vertical/Entrega Incremental: A equipe trabalha com entregas incrementais de valor, evitando grandes blocos de trabalho' }
+                    { 
+                        id: 25, 
+                        text: 'Qualidade e Clareza: Os itens de trabalho são claros, bem definidos, pequenos o suficiente e compreensíveis antes de entrarem no fluxo',
+                        tooltip: 'Tarefa confusa gera retrabalho. Item claro e pequeno é mais fácil de estimar, fazer e validar.'
+                    },
+                    { 
+                        id: 26, 
+                        text: 'Políticas de Entrada: A equipe possui critérios claros que determinam quando um item está pronto para iniciar o trabalho',
+                        tooltip: 'Critérios de entrada evitam começar trabalho mal definido. Se não tá pronto pra começar, não começa.'
+                    },
+                    { 
+                        id: 27, 
+                        text: 'Políticas de Conclusão (Definition of Done): A equipe possui critérios claros e compartilhados que definem quando um trabalho é considerado concluído',
+                        tooltip: 'Definition of Done evita "99% pronto". Todo mundo sabe quando algo tá realmente terminado.'
+                    },
+                    { 
+                        id: 28, 
+                        text: 'Tamanho dos Itens: Os itens de trabalho são fatiados de forma adequada para permitir entrega frequente e aprendizado rápido',
+                        tooltip: 'Item grande demora e trava. Fatiar em pedaços menores permite entregar valor mais cedo e validar rápido.'
+                    },
+                    { 
+                        id: 29, 
+                        text: 'Replenishment e Preparação: A equipe possui práticas regulares para revisar, priorizar e preparar novos itens antes de entrarem no fluxo',
+                        tooltip: 'Preparar trabalho com antecedência evita time parado esperando definição. Backlog grooming é importante!'
+                    }
                 ]
             },
             {
                 icon: '🔧',
                 title: 'Fluxo e Engenharia',
                 questions: [
-                    { id: 31, text: 'Gestão do Fluxo (WIP): A equipe limita trabalho em progresso, promove foco e melhora continuamente o fluxo de entrega' },
-                    { id: 32, text: 'Arquitetura Evolutiva: Decisões arquiteturais são tomadas de forma colaborativa, no momento adequado e alinhadas ao fluxo de entrega' },
-                    { id: 33, text: 'Tempo de Teste: Testes acontecem próximos ao desenvolvimento, reduzindo riscos e retrabalho' },
-                    { id: 34, text: 'Revisão de Código e Qualidade Técnica: Revisões de código e testes são práticas consistentes e colaborativas dentro da equipe' },
-                    { id: 35, text: 'Testes Coordenados (Holístico): Há coordenação entre diferentes tipos de teste para garantir qualidade do produto' },
-                    { id: 36, text: 'Automação de Testes: Existe automação de testes como suporte à entrega contínua e à qualidade' },
-                    { id: 37, text: 'Integração Contínua: O código é integrado frequentemente e validado automaticamente, reduzindo riscos de falhas' },
-                    { id: 38, text: 'Testes Unitários: A equipe possui prática e maturidade na criação e manutenção de testes unitários' },
-                    { id: 39, text: 'Refatoramento Contínuo: A equipe refatora o código de forma constante para manter qualidade, simplicidade e sustentabilidade técnica' },
-                    { id: 40, text: 'Excelência Técnica Sustentável: Práticas técnicas são parte da cultura da equipe, suportando evolução contínua do produto e do fluxo' }
+                    { 
+                        id: 30, 
+                        text: 'Gestão do Fluxo (WIP): A equipe limita trabalho em progresso, promove foco e melhora continuamente o fluxo de entrega',
+                        tooltip: 'Fazer menos coisas ao mesmo tempo faz você terminar mais rápido. WIP limitado = foco = entrega.'
+                    },
+                    { 
+                        id: 31, 
+                        text: 'Tempo de Teste: Testes acontecem próximos ao desenvolvimento, reduzindo riscos e retrabalho',
+                        tooltip: 'Quanto mais cedo testar, mais barato é corrigir. Bug descoberto tarde custa caro pra consertar.'
+                    },
+                    { 
+                        id: 32, 
+                        text: 'Revisão de Código e Qualidade Técnica: Revisões de código e testes são práticas consistentes e colaborativas dentro da equipe',
+                        tooltip: 'Code review não é pegadinha, é aprendizado mútuo. Melhora código e espalha conhecimento no time.'
+                    },
+                    { 
+                        id: 33, 
+                        text: 'Testes Coordenados (Holístico): Há coordenação entre diferentes tipos de teste para garantir qualidade do produto',
+                        tooltip: 'Teste unitário, integração, E2E... cada um tem seu papel. Coordenar eles garante qualidade de ponta a ponta.'
+                    },
+                    { 
+                        id: 34, 
+                        text: 'Excelência Técnica Sustentável: Práticas técnicas são parte da cultura da equipe, suportando evolução contínua do produto e do fluxo',
+                        tooltip: 'Excelência técnica não é luxo, é necessidade. Código bom hoje facilita mudança amanhã. Invista nisso.'
+                    }
                 ]
             }
         ];
