@@ -91,6 +91,11 @@ const app = {
         this.currentEvaluationType = type;
         this.updateEvaluationTypeButtons();
         this.renderQuestions();
+        // Mostrar/ocultar info box da Jornada Ágil
+        const jornadaInfo = document.getElementById('jornadaInfoBox');
+        if (jornadaInfo) {
+            jornadaInfo.style.display = type === 'jornada' ? 'block' : 'none';
+        }
     },
 
     // Atualizar botões de tipo de avaliação

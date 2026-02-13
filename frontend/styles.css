@@ -227,6 +227,95 @@ body {
     position: relative;
 }
 
+/* Jornada Info Box */
+.jornada-info-box {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8ecf8 100%);
+    border: 2px solid #667eea;
+    border-radius: 12px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+}
+
+.jornada-info-box h3 {
+    color: #4a5568;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.jornada-info-box p {
+    color: #555;
+    font-size: 1.05em;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.response-legend {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.response-legend h4 {
+    color: #4a5568;
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+
+.response-legend ul {
+    list-style: none;
+    padding: 0;
+}
+
+.response-legend li {
+    padding: 8px 0;
+    font-size: 0.95em;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.legend-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85em;
+    min-width: 160px;
+    text-align: center;
+}
+
+.tag-red {
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
+}
+
+.tag-orange {
+    background: #ffedd5;
+    color: #ea580c;
+    border: 1px solid #fdba74;
+}
+
+.tag-yellow {
+    background: #fef9c3;
+    color: #ca8a04;
+    border: 1px solid #fde047;
+}
+
+.tag-green {
+    background: #dcfce7;
+    color: #16a34a;
+    border: 1px solid #86efac;
+}
+
+.tag-blue {
+    background: #dbeafe;
+    color: #2563eb;
+    border: 1px solid #93c5fd;
+}
+
 /* Tooltip Styles */
 .tooltip-icon {
     display: inline-block;
