@@ -227,7 +227,28 @@ body {
     position: relative;
 }
 
-/* Jornada Info Box */
+/* Info Boxes */
+.kanban-info-box {
+    background: linear-gradient(135deg, #f0fff4 0%, #e6f7ed 100%);
+    border: 2px solid #38a169;
+    border-radius: 12px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+}
+
+.kanban-info-box h3 {
+    color: #276749;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.kanban-info-box p {
+    color: #555;
+    font-size: 1.05em;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
 .jornada-info-box {
     background: linear-gradient(135deg, #f0f4ff 0%, #e8ecf8 100%);
     border: 2px solid #667eea;

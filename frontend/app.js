@@ -91,10 +91,14 @@ const app = {
         this.currentEvaluationType = type;
         this.updateEvaluationTypeButtons();
         this.renderQuestions();
-        // Mostrar/ocultar info box da Jornada Ágil
+        // Mostrar/ocultar info boxes
         const jornadaInfo = document.getElementById('jornadaInfoBox');
+        const kanbanInfo = document.getElementById('kanbanInfoBox');
         if (jornadaInfo) {
             jornadaInfo.style.display = type === 'jornada' ? 'block' : 'none';
+        }
+        if (kanbanInfo) {
+            kanbanInfo.style.display = type === 'kanban' ? 'block' : 'none';
         }
     },
 
