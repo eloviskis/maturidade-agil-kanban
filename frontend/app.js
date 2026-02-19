@@ -161,7 +161,7 @@ const app = {
                         ${q.id}. ${q.text} ${tooltipHtml}
                     </div>
                     <div class="options">
-                        ${this.createOptions(q.id)}
+                        ${this.createOptions(q.id, q.buttonTooltips)}
                     </div>
                 `;
                 
@@ -186,35 +186,47 @@ const app = {
             document.body.appendChild(tooltipBox);
         }
 
+        const positionTooltip = (rect) => {
+            let top = rect.bottom + 8;
+            let left = rect.left - 140;
+            if (left < 10) left = 10;
+            if (left + 320 > window.innerWidth) left = window.innerWidth - 330;
+            if (top + 100 > window.innerHeight) {
+                top = rect.top - tooltipBox.offsetHeight - 8;
+            }
+            tooltipBox.style.top = top + 'px';
+            tooltipBox.style.left = left + 'px';
+        };
+
         document.querySelectorAll('.tooltip-icon').forEach(icon => {
             icon.addEventListener('mouseenter', (e) => {
                 const text = e.target.getAttribute('data-tooltip');
                 tooltipBox.textContent = text;
                 tooltipBox.classList.add('visible');
-
-                const rect = e.target.getBoundingClientRect();
-                let top = rect.bottom + 8;
-                let left = rect.left - 140;
-
-                // Não ultrapassar bordas da tela
-                if (left < 10) left = 10;
-                if (left + 320 > window.innerWidth) left = window.innerWidth - 330;
-                if (top + 100 > window.innerHeight) {
-                    top = rect.top - tooltipBox.offsetHeight - 8;
-                }
-
-                tooltipBox.style.top = top + 'px';
-                tooltipBox.style.left = left + 'px';
+                positionTooltip(e.target.getBoundingClientRect());
             });
 
             icon.addEventListener('mouseleave', () => {
                 tooltipBox.classList.remove('visible');
             });
         });
+
+        document.querySelectorAll('label[data-btn-tooltip]').forEach(label => {
+            label.addEventListener('mouseenter', (e) => {
+                const text = e.target.getAttribute('data-btn-tooltip');
+                tooltipBox.textContent = text;
+                tooltipBox.classList.add('visible');
+                positionTooltip(e.target.getBoundingClientRect());
+            });
+
+            label.addEventListener('mouseleave', () => {
+                tooltipBox.classList.remove('visible');
+            });
+        });
     },
 
     // Criar opções de resposta
-    createOptions(questionId) {
+    createOptions(questionId, buttonTooltips = {}) {
         const options = [
             { value: 5, label: 'Concordo Totalmente' },
             { value: 4, label: 'Concordo' },
@@ -223,12 +235,17 @@ const app = {
             { value: 1, label: 'Discordo Totalmente' }
         ];
 
-        return options.map(opt => `
+        return options.map(opt => {
+            const btnTip = buttonTooltips && buttonTooltips[opt.value]
+                ? ` data-btn-tooltip="${buttonTooltips[opt.value].replace(/"/g, '&quot;')}"`
+                : '';
+            return `
             <div class="option">
                 <input type="radio" id="q${questionId}-${opt.value}" name="q${questionId}" value="${opt.value}">
-                <label for="q${questionId}-${opt.value}">${opt.label}</label>
+                <label for="q${questionId}-${opt.value}"${btnTip}>${opt.label}</label>
             </div>
-        `).join('');
+        `;
+        }).join('');
     },
 
     // Event listeners para questões
@@ -1360,32 +1377,74 @@ const app = {
                     { 
                         id: 1, 
                         text: 'Mentalidade Ágil: A equipe compreende, acredita e pratica os valores e princípios ágeis no dia a dia, buscando aprendizado, adaptação e melhoria contínua',
-                        tooltip: 'Isso mostra se a galera realmente abraçou o ágil ou se é só papo. Times com mentalidade ágil de verdade se adaptam mais rápido e entregam melhor.' 
+                        tooltip: 'Isso mostra se a galera realmente abraçou o ágil ou se é só papo. Times com mentalidade ágil de verdade se adaptam mais rápido e entregam melhor.',
+                        buttonTooltips: {
+                            1: 'Ainda não fazendo ou sendo "Ágil".',
+                            2: 'Aplicando mecanismo de uma metodologia que suporta o "Ágil" como Scrum, Kanban, SAFe, etc.',
+                            3: '80% do time sabe explicar o trabalho e benefícios do "Ágil", de uma metodologia ágil e acredita em seus benefícios. O time faz e/ou sugere melhorias frequentemente.',
+                            4: 'A equipe trabalha de forma ágil.',
+                            5: 'Busca ativamente novas formas de trabalhar de maneira cada vez mais ágil.'
+                        }
                     },
                     { 
                         id: 2, 
                         text: 'Moral da Equipe: Há bom nível de engajamento, satisfação, confiança e bem-estar das pessoas que compõem a equipe',
-                        tooltip: 'Time feliz produz mais e melhor. Se a moral tá baixa, a produtividade despenca. É sobre cuidar das pessoas primeiro.'
+                        tooltip: 'Time feliz produz mais e melhor. Se a moral tá baixa, a produtividade despenca. É sobre cuidar das pessoas primeiro.',
+                        buttonTooltips: {
+                            1: 'Ocorrências regulares de comportamentos onde um culpa o outro, aponta dedos, negação, raiva, facada nas costas, agressividade, etc. Resistência ativa às mudanças. As pessoas querem sair ou não gostam do ambiente de trabalho da equipe.',
+                            2: 'Ainda há elementos do estágio anterior, porém já se vê um progresso constante para mudanças de tais comportamentos. Problemas estão sendo endereçados e há um sentimento geral de melhoria na moral da equipe.',
+                            3: 'Na maioria dos casos, as pessoas se dão bem e estão felizes no trabalho.',
+                            4: 'As pessoas, em geral, trabalham felizes, são engajadas, produtivas e gostam de trabalhar juntas.',
+                            5: 'A maioria das pessoas da equipe sentem que elas estão em um dos melhores times que já trabalharam. São felizes por virem trabalhar e aceitar novos desafios.'
+                        }
                     },
                     { 
                         id: 3, 
                         text: 'Trabalho em Equipe: A equipe demonstra colaboração, confiança mútua, ajuda entre os membros e senso de responsabilidade coletiva pelos resultados',
-                        tooltip: 'Aqui você vê se é um time de verdade ou só um bando de pessoas trabalhando junto. Colaboração genuína faz toda diferença.'
+                        tooltip: 'Aqui você vê se é um time de verdade ou só um bando de pessoas trabalhando junto. Colaboração genuína faz toda diferença.',
+                        buttonTooltips: {
+                            1: 'Não existe.',
+                            2: 'O trabalho em equipe está melhorando.',
+                            3: 'Ao menos 70% da opção "Ideal" acontece.',
+                            4: 'Ao menos 80% da opção "Ideal" acontece.',
+                            5: 'Cada indivíduo e entre os membros do time acreditam que todos têm as habilidades necessárias para desempenhar sua função, possuem integridade, desejam ver o time vencedor, ajudam e trabalham para que isso aconteça. Há cumplicidade entre toda a equipe.'
+                        }
                     },
                     { 
                         id: 4, 
                         text: 'Estágios de Desenvolvimento (Tuckman): A equipe apresenta maturidade e estabilidade em termos de formação, conflitos, alinhamento e performance consistente',
-                        tooltip: 'Times passam por fases: formação, conflito, normalização e performance. Quanto mais maduro, mais eficiente e menos drama.'
+                        tooltip: 'Times passam por fases: formação, conflito, normalização e performance. Quanto mais maduro, mais eficiente e menos drama.',
+                        buttonTooltips: {
+                            1: 'Formação: a equipe acabou de ser formada, com membros entrando ou saindo.',
+                            2: 'Tempestade: a equipe está começando a entender como trabalhar junta e apresenta uma quantidade maior de conflitos.',
+                            3: 'Normalidade: a equipe já trabalha bem em conjunto e está caminhando para uma alta performance.',
+                            4: 'Está com boa performance de maneira consistente por ao menos 8 semanas.',
+                            5: 'Está com boa performance de maneira consistente por ao menos 6 meses.'
+                        }
                     },
                     { 
                         id: 5, 
                         text: 'Ritmo Sustentável: A equipe trabalha de forma equilibrada e sustentável ao longo do tempo, evitando sobrecarga contínua e desgaste',
-                        tooltip: 'Maratona não é sprint. Ritmo sustentável evita burnout e mantém qualidade. Correria constante queima o time.'
+                        tooltip: 'Maratona não é sprint. Ritmo sustentável evita burnout e mantém qualidade. Correria constante queima o time.',
+                        buttonTooltips: {
+                            1: 'As pessoas estão cansadas, irritadas, esgotadas e/ou trabalhando em horas extras de forma regular. Essa situação ainda é considerada normal.',
+                            2: 'Há um reconhecimento de que o ritmo de trabalho não é sustentável, e passos para melhorar a situação já estão sendo dados.',
+                            3: 'Há consenso de que a equipe está trabalhando próximo de um ritmo sustentável, apesar de ainda existirem alguns picos de trabalho pesado de forma inconsistente.',
+                            4: 'A equipe tem suporte da empresa para trabalhar em um ritmo sustentável. Há consenso de que isso já acontece em ao menos 80% dos casos de maneira consistente.',
+                            5: 'A empresa e a equipe atuam de forma ativa para garantir que o time continue trabalhando em um ritmo sustentável de maneira perene.'
+                        }
                     },
                     { 
                         id: 6, 
                         text: 'Acordo de Trabalho: A equipe possui acordos claros, explícitos e compartilhados sobre como trabalhar, colaborar, tomar decisões e manter o ritmo saudável',
-                        tooltip: 'Combinados claros fazem todo mundo saber o que esperar. Evita conflito e deixa o trabalho fluir melhor.'
+                        tooltip: 'Combinados claros fazem todo mundo saber o que esperar. Evita conflito e deixa o trabalho fluir melhor.',
+                        buttonTooltips: {
+                            1: 'Não existe.',
+                            2: 'Algumas normas de atuação do time são reconhecidas, mas nunca foram escritas ou formalmente acordadas pela equipe.',
+                            3: 'Há um acordo de trabalho documentado, acordado pela equipe e claramente visível em uma área pública. O acordo é mantido atualizado.',
+                            4: 'O acordo é seguido pela equipe e inclui elementos sobre seus processos, trabalho em equipe e manutenção do ritmo de trabalho.',
+                            5: 'O acordo é seguido de forma natural; exceções são identificadas rapidamente e devidamente endereçadas.'
+                        }
                     }
                 ]
             },
