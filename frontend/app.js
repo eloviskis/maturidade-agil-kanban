@@ -1479,17 +1479,38 @@ const app = {
                     { 
                         id: 9, 
                         text: 'Continuidade da Equipe: A composição da equipe é estável ao longo do tempo, favorecendo aprendizado coletivo e melhoria contínua',
-                        tooltip: 'Time que fica junto aprende junto e evolui junto. Rotatividade alta prejudica evolução e conhecimento.'
+                        tooltip: 'Time que fica junto aprende junto e evolui junto. Rotatividade alta prejudica evolução e conhecimento.',
+                        buttonTooltips: {
+                            1: 'Constante saída de pessoas e/ou o time é formado apenas para cada release e em seguida já desmontado após a entrega.',
+                            2: 'Há um entendimento que continuidade da equipe é importante, progresso está sendo feito e passos para o próximo estágio estão sendo tomados.',
+                            3: '50% da equipe é a mesma nos últimos 9 meses e o time fez múltiplas entregas e releases juntos, sem que a equipe fosse recriada novamente.',
+                            4: 'Mais de 70% da equipe é a mesma nos últimos 9 meses e o time fez múltiplas entregas e releases juntos, sem que a equipe fosse recriada novamente.',
+                            5: 'Mais de 90% da equipe estão juntos há mais de 12 meses fazendo entregas constantes.'
+                        }
                     },
                     { 
                         id: 10, 
                         text: 'Multifuncionalidade: A equipe possui, internamente, todas as habilidades necessárias para entregar valor de ponta a ponta, com compartilhamento de conhecimento',
-                        tooltip: 'Time autônomo não depende de outros times pra entregar. Compartilhar conhecimento evita gargalos e "donos" de código.'
+                        tooltip: 'Time autônomo não depende de outros times pra entregar. Compartilhar conhecimento evita gargalos e "donos" de código.',
+                        buttonTooltips: {
+                            1: 'Uma porção "significante" do que se é necessário conhecer para entrega das histórias se encontra fora da equipe.',
+                            2: '"Algumas" habilidades necessárias para entrega das histórias existem apenas fora da equipe.',
+                            3: '"Todas" habilidades necessárias para desenvolvimento das histórias existem dentro da equipe.',
+                            4: '"Todas" habilidades necessárias para entrega das histórias existem dentro da equipe e há "cross-training" em algumas.',
+                            5: '"Todas" habilidades necessárias para entrega das histórias existem dentro da equipe e há "cross-training" na maioria delas.'
+                        }
                     },
                     { 
                         id: 11, 
                         text: 'Local de Trabalho/Proximidade: A configuração física ou virtual favorece comunicação rápida, colaboração e resolução eficiente de problemas',
-                        tooltip: 'Seja remoto ou presencial, o importante é facilitar conversa rápida. Comunicação travada = trabalho travado.'
+                        tooltip: 'Seja remoto ou presencial, o importante é facilitar conversa rápida. Comunicação travada = trabalho travado.',
+                        buttonTooltips: {
+                            1: 'Os membros têm pouca proximidade entre si.',
+                            2: 'Há planos para que eles estejam mais próximos.',
+                            3: 'A maioria dos membros está acessível em até 30 segundos uns dos outros.',
+                            4: 'A maioria pode se ouvir entre si enquanto trabalham.',
+                            5: 'A maioria está sentada numa sala juntos.'
+                        }
                     }
                 ]
             },
@@ -1500,7 +1521,14 @@ const app = {
                     { 
                         id: 12, 
                         text: 'Auto-organização: A equipe possui autonomia para decidir como organizar o trabalho, assumir demandas, colaborar e entregar valor',
-                        tooltip: 'Time que se auto-organiza é mais engajado e toma melhores decisões. Microgerenciamento mata criatividade e ownership.'
+                        tooltip: 'Time que se auto-organiza é mais engajado e toma melhores decisões. Microgerenciamento mata criatividade e ownership.',
+                        buttonTooltips: {
+                            1: 'A maioria das pessoas não tem opção para escolher em que irá trabalhar; as estimativas são feitas fora da equipe. Não se sentem capazes de tomar decisões.',
+                            2: 'Alguns comportamentos do próximo estágio são discutidos, encorajados ou tentados.',
+                            3: 'A equipe puxa tarefas do backlog do produto, faz suas próprias estimativas, escolhe no que vai trabalhar e utiliza a Definição de Preparado (DoR) e Definição de Pronto (DoD) para guiar interações dentro e fora da equipe.',
+                            4: 'Os papéis e responsabilidades do Scrum Master são parcialmente compartilhados pelos membros do time, reduzindo consideravelmente a dependência de uma única pessoa. Se um membro não está presente, outros ajudam a dar continuidade até a finalização da história.',
+                            5: 'O time se auto-organiza de forma madura e consistente.'
+                        }
                     },
                     { 
                         id: 13, 
