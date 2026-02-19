@@ -1455,12 +1455,26 @@ const app = {
                     { 
                         id: 7, 
                         text: 'Tamanho da Equipe: O tamanho da equipe favorece comunicação eficaz, colaboração e entrega contínua de valor',
-                        tooltip: 'Nem muito grande(muita gente, pouca comunicação) nem muito pequeno (falta skill). O ideal é entre 5-9 pessoas.'
+                        tooltip: 'Nem muito grande(muita gente, pouca comunicação) nem muito pequeno (falta skill). O ideal é entre 5-9 pessoas.',
+                        buttonTooltips: {
+                            1: 'A equipe possui mais de 20 pessoas.',
+                            2: 'Reconhece-se que equipes menores são necessárias e há um plano de curto prazo para reduzir o tamanho do time, ou essa redução acontecerá em breve.',
+                            3: 'A equipe possui menos de 20 pessoas.',
+                            4: 'A equipe possui menos de 10 pessoas.',
+                            5: 'A equipe possui aproximadamente 7 pessoas (7 ± 2), considerado o tamanho ideal para alta colaboração e eficiência.'
+                        }
                     },
                     { 
                         id: 8, 
                         text: 'Dedicação da Equipe: Os membros possuem foco e dedicação à equipe e ao fluxo de trabalho, evitando multitarefa excessiva entre times ou projetos',
-                        tooltip: 'Multitarefa extrema mata produtividade. Pessoas dedicadas ao time entregam mais e com mais qualidade.'
+                        tooltip: 'Multitarefa extrema mata produtividade. Pessoas dedicadas ao time entregam mais e com mais qualidade.',
+                        buttonTooltips: {
+                            1: 'A maioria dos membros está alocada em múltiplos times ou projetos.',
+                            2: 'A maioria dos membros está alocada ao menos 50% do seu tempo para a equipe ou projeto. Ninguém está alocado menos de 30% na equipe.',
+                            3: 'A maioria dos membros está alocada ≥ 70% do seu tempo para a equipe ou projeto. Ninguém está alocado menos que 50% na equipe.',
+                            4: 'A maioria dos membros está alocada ≥ 90% do seu tempo para a equipe ou projeto. Ninguém está alocado menos que 70% na equipe.',
+                            5: 'A maioria dos membros está alocada 100% do seu tempo para a equipe ou projeto. Ninguém está alocado menos que 80% na equipe.'
+                        }
                     },
                     { 
                         id: 9, 
