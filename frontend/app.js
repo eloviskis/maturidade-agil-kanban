@@ -1665,12 +1665,26 @@ const app = {
                     { 
                         id: 23, 
                         text: 'Tempo de Ciclo: A equipe tem capacidade de reduzir o tempo total entre a concepção de uma demanda e sua disponibilização para uso real',
-                        tooltip: 'Quanto mais rápido da ideia ao usuário usando, mais rápido você aprende e ajusta. Velocidade gera aprendizado.'
+                        tooltip: 'Quanto mais rápido da ideia ao usuário usando, mais rápido você aprende e ajusta. Velocidade gera aprendizado.',
+                        buttonTooltips: {
+                            1: 'O ciclo entre concepção e pronto para release leva um ano ou mais.',
+                            2: 'O ciclo entre concepção e pronto para release pode levar até 6 meses.',
+                            3: 'Todo o trabalho vai da concepção ao release em 3 meses ou menos.',
+                            4: 'Todo o trabalho vai da concepção ao release em 2 meses ou menos, ou às vezes em semanas.',
+                            5: 'É possível ir da concepção ao release em dias.'
+                        }
                     },
                     { 
                         id: 24, 
                         text: 'Visão do Produto: Existe uma visão clara, compartilhada e compreendida do produto, orientando decisões e prioridades',
-                        tooltip: 'Visão clara é como bússola do time. Todo mundo sabe pra onde tá indo e por quê.'
+                        tooltip: 'Visão clara é como bússola do time. Todo mundo sabe pra onde tá indo e por quê.',
+                        buttonTooltips: {
+                            1: 'A visão do produto não está definida.',
+                            2: 'A visão do produto está escrita em algum lugar ou o PO (ou pessoa similar) sabe qual é, mas não está amplamente disseminada.',
+                            3: 'Há uma definição escrita e precisa da visão do produto, e todos sabem claramente qual é.',
+                            4: 'Existe uma definição atraente da visão do produto, que pode ser claramente articulada pelo PO ou pessoa similar.',
+                            5: 'A visão do produto é simples, clara, atraente e todos os envolvidos conseguem articulá-la e agir alinhados a ela.'
+                        }
                     }
                 ]
             },
@@ -1681,27 +1695,62 @@ const app = {
                     { 
                         id: 25, 
                         text: 'Qualidade e Clareza: Os itens de trabalho são claros, bem definidos, pequenos o suficiente e compreensíveis antes de entrarem no fluxo',
-                        tooltip: 'Tarefa confusa gera retrabalho. Item claro e pequeno é mais fácil de estimar, fazer e validar.'
+                        tooltip: 'Tarefa confusa gera retrabalho. Item claro e pequeno é mais fácil de estimar, fazer e validar.',
+                        buttonTooltips: {
+                            1: 'Não há conhecimento sobre o conceito de INVEST.',
+                            2: 'A equipe entende o que é o INVEST e começa a aplicar parte dele na escrita das histórias.',
+                            3: 'A maioria dos critérios do INVEST é aplicada nas histórias.',
+                            4: 'O INVEST é seguido na maioria das histórias.',
+                            5: 'O INVEST é seguido em todas as histórias.'
+                        }
                     },
                     { 
                         id: 26, 
                         text: 'Políticas de Entrada: A equipe possui critérios claros que determinam quando um item está pronto para iniciar o trabalho',
-                        tooltip: 'Critérios de entrada evitam começar trabalho mal definido. Se não tá pronto pra começar, não começa.'
+                        tooltip: 'Critérios de entrada evitam começar trabalho mal definido. Se não tá pronto pra começar, não começa.',
+                        buttonTooltips: {
+                            1: 'A Definição de Preparado (DoR) não existe.',
+                            2: 'Há entendimento da necessidade de uma DoR e existe um acordo tácito sobre seu conteúdo.',
+                            3: 'Existe uma Definição de Preparado construída pela equipe, que inclui critérios de aceite.',
+                            4: 'Há uma DoR forte, clara e compreensiva (mesmo que simples), publicada e disponível a todos.',
+                            5: 'A DoR existe, é compreendida por todos, revisada periodicamente, atualizada quando necessário e seguida de forma disciplinada.'
+                        }
                     },
                     { 
                         id: 27, 
                         text: 'Políticas de Conclusão (Definition of Done): A equipe possui critérios claros e compartilhados que definem quando um trabalho é considerado concluído',
-                        tooltip: 'Definition of Done evita "99% pronto". Todo mundo sabe quando algo tá realmente terminado.'
+                        tooltip: 'Definition of Done evita "99% pronto". Todo mundo sabe quando algo tá realmente terminado.',
+                        buttonTooltips: {
+                            1: 'A Definição de Pronto (DoD) não existe.',
+                            2: 'Há entendimento da necessidade de uma DoD e existe um acordo tácito sobre seu conteúdo.',
+                            3: 'Existe uma Definição de Pronto construída pela equipe.',
+                            4: 'Há uma DoD forte, clara e compreensiva (mesmo que simples), publicada e disponível a todos.',
+                            5: 'A DoD existe, é compreendida por todos, revisada periodicamente, atualizada quando necessário e seguida com disciplina.'
+                        }
                     },
                     { 
                         id: 28, 
                         text: 'Tamanho dos Itens: Os itens de trabalho são fatiados de forma adequada para permitir entrega frequente e aprendizado rápido',
-                        tooltip: 'Item grande demora e trava. Fatiar em pedaços menores permite entregar valor mais cedo e validar rápido.'
+                        tooltip: 'Item grande demora e trava. Fatiar em pedaços menores permite entregar valor mais cedo e validar rápido.',
+                        buttonTooltips: {
+                            1: 'O tamanho das histórias é definido de forma randômica.',
+                            2: 'O time começa a perceber a relação entre sucesso e histórias menores.',
+                            3: 'O time utiliza uma regra geral que encoraja a criação de histórias pequenas.',
+                            4: 'A maioria das histórias pode ser concluída em uma semana ou menos.',
+                            5: 'A maioria das histórias pode ser concluída entre 1 e 3 dias.'
+                        }
                     },
                     { 
                         id: 29, 
                         text: 'Replenishment e Preparação: A equipe possui práticas regulares para revisar, priorizar e preparar novos itens antes de entrarem no fluxo',
-                        tooltip: 'Preparar trabalho com antecedência evita time parado esperando definição. Backlog grooming é importante!'
+                        tooltip: 'Preparar trabalho com antecedência evita time parado esperando definição. Backlog grooming é importante!',
+                        buttonTooltips: {
+                            1: 'As histórias raramente estão preparadas antes do time iniciar o desenvolvimento.',
+                            2: 'A equipe entende a importância de refinar as histórias antes de iniciar o desenvolvimento e ações estão sendo tomadas para evoluir.',
+                            3: 'Em 60% ou mais do tempo, existem histórias preparadas quando necessário.',
+                            4: 'Há histórias preparadas em quantidade suficiente para sustentar o desenvolvimento.',
+                            5: 'Há sempre mais histórias preparadas do que o necessário para manter o fluxo de desenvolvimento.'
+                        }
                     }
                 ]
             },
@@ -1712,27 +1761,62 @@ const app = {
                     { 
                         id: 30, 
                         text: 'Gestão do Fluxo (WIP): A equipe limita trabalho em progresso, promove foco e melhora continuamente o fluxo de entrega',
-                        tooltip: 'Fazer menos coisas ao mesmo tempo faz você terminar mais rápido. WIP limitado = foco = entrega.'
+                        tooltip: 'Fazer menos coisas ao mesmo tempo faz você terminar mais rápido. WIP limitado = foco = entrega.',
+                        buttonTooltips: {
+                            1: 'A quantidade de Trabalho em Progresso (WIP) é desconhecida e não há entendimento sobre fluxo contínuo.',
+                            2: 'O WIP é rastreado e visível. O conceito de fluxo contínuo é conhecido e a equipe está tentando aplicá-lo, pois entende seu valor.',
+                            3: 'O fluxo contínuo é ativamente perseguido. Há limite de WIP definido e a maioria dos membros trabalha em no máximo duas histórias por vez.',
+                            4: 'O fluxo contínuo é ativamente perseguido. O limite de WIP é respeitado e a maioria dos membros trabalha em apenas uma história por vez; às vezes, mais de um membro trabalha na mesma história.',
+                            5: 'O trabalho simultâneo só ocorre quando não aumenta o ciclo de entrega. A maioria dos membros trabalha colaborativamente na mesma história para acelerar o fluxo.'
+                        }
                     },
                     { 
                         id: 31, 
                         text: 'Tempo de Teste: Testes acontecem próximos ao desenvolvimento, reduzindo riscos e retrabalho',
-                        tooltip: 'Quanto mais cedo testar, mais barato é corrigir. Bug descoberto tarde custa caro pra consertar.'
+                        tooltip: 'Quanto mais cedo testar, mais barato é corrigir. Bug descoberto tarde custa caro pra consertar.',
+                        buttonTooltips: {
+                            1: 'O teste é realizado muito tempo depois da implementação.',
+                            2: 'O teste é realizado dentro de até 8 semanas após a implementação.',
+                            3: 'O teste é realizado dentro de até 4 semanas após a implementação.',
+                            4: 'O teste é realizado dentro de até 2 semanas após a implementação e, na maioria das vezes, antes do início da próxima história.',
+                            5: 'Há uso de TDD e os testes (incluindo testes de UI) são realizados imediatamente após a codificação da história.'
+                        }
                     },
                     { 
                         id: 32, 
                         text: 'Revisão de Código e Qualidade Técnica: Revisões de código e testes são práticas consistentes e colaborativas dentro da equipe',
-                        tooltip: 'Code review não é pegadinha, é aprendizado mútuo. Melhora código e espalha conhecimento no time.'
+                        tooltip: 'Code review não é pegadinha, é aprendizado mútuo. Melhora código e espalha conhecimento no time.',
+                        buttonTooltips: {
+                            1: 'Não é realizada nenhuma revisão de código ou revisão em par (code review / pair review).',
+                            2: 'Reconhece-se que a revisão de código é importante e ações estão sendo tomadas para evoluir.',
+                            3: '50% ou mais das histórias passam por revisão de código (code review) e revisão de testes (test review).',
+                            4: '80% ou mais das histórias passam por revisão de código e testes, realizadas por pares ou com apoio de ferramentas.',
+                            5: '90% ou mais das histórias passam por revisão de código e testes, realizadas por pares ou com apoio de ferramentas.'
+                        }
                     },
                     { 
                         id: 33, 
                         text: 'Testes Coordenados (Holístico): Há coordenação entre diferentes tipos de teste para garantir qualidade do produto',
-                        tooltip: 'Teste unitário, integração, E2E... cada um tem seu papel. Coordenar eles garante qualidade de ponta a ponta.'
+                        tooltip: 'Teste unitário, integração, E2E... cada um tem seu papel. Coordenar eles garante qualidade de ponta a ponta.',
+                        buttonTooltips: {
+                            1: 'Diferentes tipos de teste (unitário, funcional, integração etc.) são realizados sem qualquer coordenação entre as partes.',
+                            2: 'Reconhece-se que testes holísticos são importantes e ações estão sendo tomadas para evoluir.',
+                            3: 'Em 50% ou mais das histórias, desenvolvedores e testers coordenam seus esforços de teste.',
+                            4: 'Em 80% ou mais das histórias, desenvolvedores e testers coordenam seus esforços de teste.',
+                            5: 'Todos os testes são coordenados antes da codificação, com base nas histórias de usuário.'
+                        }
                     },
                     { 
                         id: 34, 
                         text: 'Excelência Técnica Sustentável: Práticas técnicas são parte da cultura da equipe, suportando evolução contínua do produto e do fluxo',
-                        tooltip: 'Excelência técnica não é luxo, é necessidade. Código bom hoje facilita mudança amanhã. Invista nisso.'
+                        tooltip: 'Excelência técnica não é luxo, é necessidade. Código bom hoje facilita mudança amanhã. Invista nisso.',
+                        buttonTooltips: {
+                            1: 'Integração contínua não está implementada.',
+                            2: 'A integração contínua está implementada, porém roda manualmente e falhas não são corrigidas imediatamente.',
+                            3: 'A integração contínua roda a cada uma hora e falhas são resolvidas relativamente rápido.',
+                            4: 'A integração contínua roda a cada 10 minutos e o time prioriza a resolução imediata de falhas antes de continuar.',
+                            5: 'A integração contínua roda a cada check-in (commit), garantindo feedback quase imediato.'
+                        }
                     }
                 ]
             }
