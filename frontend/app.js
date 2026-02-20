@@ -1215,22 +1215,50 @@ const app = {
                     { 
                         id: 1, 
                         text: 'O time possui um quadro Kanban visível e atualizado com todas as etapas do fluxo de trabalho',
-                        tooltip: 'Quadro visível é a base do Kanban. Se ninguém olha ou não reflete a realidade, vira decoração inútil.'
+                        tooltip: 'Quadro visível é a base do Kanban. Se ninguém olha ou não reflete a realidade, vira decoração inútil.',
+                        buttonTooltips: {
+                            1: 'Não existe quadro Kanban ou ele não é utilizado pelo time.',
+                            2: 'Existe um quadro, mas está desatualizado ou não representa todas as etapas do processo.',
+                            3: 'O quadro existe, é visível e possui as principais etapas, mas nem sempre está atualizado.',
+                            4: 'O quadro é visível, representa o fluxo real e é atualizado pela maior parte do time na maioria do tempo.',
+                            5: 'O quadro é visível, completo, sempre atualizado e consultado ativamente por todo o time.'
+                        }
                     },
                     { 
                         id: 2, 
                         text: 'O time estabelece e respeita os limites de WIP (Work In Progress) para cada coluna do quadro',
-                        tooltip: 'WIP limitado força foco e finalização. Sem limite, vira bagunça com tudo começado e nada terminado.'
+                        tooltip: 'WIP limitado força foco e finalização. Sem limite, vira bagunça com tudo começado e nada terminado.',
+                        buttonTooltips: {
+                            1: 'Não há limites de WIP definidos; o time trabalha em quantas tarefas quiser simultaneamente.',
+                            2: 'O conceito de WIP é conhecido, mas os limites ainda não foram formalmente estabelecidos.',
+                            3: 'Há limites de WIP definidos para algumas colunas, mas nem sempre são respeitados.',
+                            4: 'Os limites de WIP estão definidos e são respeitados na maioria do tempo pela equipe.',
+                            5: 'Os limites de WIP são respeitados consistentemente; quando violados, o time age imediatamente para resolver.'
+                        }
                     },
                     { 
                         id: 3, 
                         text: 'O fluxo de trabalho no quadro Kanban reflete com precisão o processo real do time',
-                        tooltip: 'Quadro que não reflete a realidade é mentira visual. Precisa ser o espelho do que realmente acontece.'
+                        tooltip: 'Quadro que não reflete a realidade é mentira visual. Precisa ser o espelho do que realmente acontece.',
+                        buttonTooltips: {
+                            1: 'O quadro não representa o processo real; o trabalho acontece de forma diferente do que está mapeado.',
+                            2: 'O quadro representa partes do processo, mas há etapas importantes que não estão visíveis.',
+                            3: 'O quadro representa o processo real na maior parte, com pequenas divergências ocasionais.',
+                            4: 'O fluxo no quadro é fiel ao processo real e o time o ajusta quando o processo muda.',
+                            5: 'O quadro é o espelho perfeito do processo; qualquer mudança no fluxo é imediatamente refletida.'
+                        }
                     },
                     { 
                         id: 4, 
                         text: 'O time realiza reuniões de reposição (replenishment) regulares para priorizar o backlog',
-                        tooltip: 'Replenishment evita time parado sem trabalho ou pegando coisa errada. É sobre ter sempre a coisa certa pra fazer.'
+                        tooltip: 'Replenishment evita time parado sem trabalho ou pegando coisa errada. É sobre ter sempre a coisa certa pra fazer.',
+                        buttonTooltips: {
+                            1: 'Não há reunião de reposição; o backlog é priorizado de forma ad hoc ou inexistente.',
+                            2: 'Há entendimento da necessidade de replenishment, mas as reuniões são irregulares ou informais.',
+                            3: 'Reuniões de reposição acontecem regularmente, mas nem sempre resultam em backlog priorizado e preparado.',
+                            4: 'Reuniões de reposição são regulares e eficazes; o backlog geralmente está priorizado para o próximo ciclo.',
+                            5: 'O replenishment é uma prática consolidada; o backlog está sempre priorizado e há itens preparados além do necessário.'
+                        }
                     }
                 ]
             },
@@ -1241,22 +1269,50 @@ const app = {
                     { 
                         id: 5, 
                         text: 'O time monitora e analisa o tempo de ciclo (cycle time) das tarefas regularmente',
-                        tooltip: 'Cycle time mostra quanto tempo leva pra entregar. Monitorar isso ajuda a prever e melhorar.'
+                        tooltip: 'Cycle time mostra quanto tempo leva pra entregar. Monitorar isso ajuda a prever e melhorar.',
+                        buttonTooltips: {
+                            1: 'O tempo de ciclo não é monitorado; o time não sabe quanto tempo leva para entregar um item.',
+                            2: 'O conceito de cycle time é conhecido, mas não há coleta ou análise sistemática dos dados.',
+                            3: 'O cycle time é coletado, mas a análise é superficial e raramente influencia decisões.',
+                            4: 'O cycle time é monitorado regularmente e os dados são usados para identificar melhorias.',
+                            5: 'O cycle time é analisado continuamente, com metas definidas e ações concretas tomadas para reduzi-lo.'
+                        }
                     },
                     { 
                         id: 6, 
                         text: 'O time identifica e remove impedimentos que bloqueiam o fluxo de trabalho rapidamente',
-                        tooltip: 'Impedimento ignorado é dinheiro perdido. Quanto mais rápido resolve, mais rápido entrega valor.'
+                        tooltip: 'Impedimento ignorado é dinheiro perdido. Quanto mais rápido resolve, mais rápido entrega valor.',
+                        buttonTooltips: {
+                            1: 'Impedimentos não são identificados ou registrados; itens ficam bloqueados por tempo indeterminado.',
+                            2: 'Impedimentos são identificados, mas a remoção é lenta ou dependente de uma única pessoa.',
+                            3: 'Impedimentos são sinalizados no quadro e há um esforço para resolvê-los, mas sem urgência definida.',
+                            4: 'Impedimentos são tratados com prioridade; a maioria é resolvida no mesmo dia ou no dia seguinte.',
+                            5: 'O time possui um processo claro para escalada e remoção de impedimentos; bloqueios raramente duram mais de horas.'
+                        }
                     },
                     { 
                         id: 7, 
                         text: 'O time utiliza classes de serviço para diferenciar tipos de trabalho e suas prioridades',
-                        tooltip: 'Nem tudo é urgente, mas algumas coisas são. Classes de serviço ajudam a tratar cada tipo do jeito certo.'
+                        tooltip: 'Nem tudo é urgente, mas algumas coisas são. Classes de serviço ajudam a tratar cada tipo do jeito certo.',
+                        buttonTooltips: {
+                            1: 'Não há distinção entre tipos de trabalho; tudo é tratado da mesma forma e na mesma fila.',
+                            2: 'Existe diferenciação informal entre urgente e normal, mas sem políticas explícitas ou visuais no quadro.',
+                            3: 'O time reconhece diferentes tipos de trabalho e há algumas regras para tratá-los, ainda que informais.',
+                            4: 'As classes de serviço estão definidas e visíveis no quadro; o time as aplica na maioria das situações.',
+                            5: 'As classes de serviço são bem definidas, compreendidas por todos e aplicadas consistentemente com políticas explícitas.'
+                        }
                     },
                     { 
                         id: 8, 
                         text: 'O time possui políticas explícitas para quando puxar novo trabalho',
-                        tooltip: 'Política clara evita gente pegando trabalho na hora errada. Todo mundo sabe quando pode puxar mais coisa.'
+                        tooltip: 'Política clara evita gente pegando trabalho na hora errada. Todo mundo sabe quando pode puxar mais coisa.',
+                        buttonTooltips: {
+                            1: 'Não há política de puxada; cada um pega trabalho quando e como quiser.',
+                            2: 'Há um entendimento informal de quando puxar, mas nada está documentado ou visível.',
+                            3: 'Existem políticas básicas definidas, mas não estão explicitamente visíveis no quadro.',
+                            4: 'As políticas de puxada estão documentadas, visíveis no quadro e são seguidas pela maioria do time.',
+                            5: 'As políticas de puxada são explícitas, compreendidas por todos e seguidas consistentemente; revisadas quando necessário.'
+                        }
                     }
                 ]
             },
@@ -1267,22 +1323,50 @@ const app = {
                     { 
                         id: 9, 
                         text: 'O time coleta e analisa métricas de throughput (vazão) regularmente',
-                        tooltip: 'Throughput é quantas coisas você entrega. Medir isso mostra se tá melhorando ou piorando.'
+                        tooltip: 'Throughput é quantas coisas você entrega. Medir isso mostra se tá melhorando ou piorando.',
+                        buttonTooltips: {
+                            1: 'O throughput não é medido; o time não tem dados sobre quantas entregas realiza por período.',
+                            2: 'Há coleta esporádica de dados de throughput, mas sem análise ou uso para tomada de decisão.',
+                            3: 'O throughput é coletado regularmente, com análises ocasionais para entender tendências.',
+                            4: 'O throughput é monitorado regularmente e os dados orientam decisões de capacidade e previsibilidade.',
+                            5: 'O throughput é analisado continuamente; o time usa previsões probabilísticas baseadas em dados históricos.'
+                        }
                     },
                     { 
                         id: 10, 
                         text: 'O time realiza retrospectivas regulares para identificar oportunidades de melhoria',
-                        tooltip: 'Retro não é reclamação, é melhoria. Parar pra pensar no que pode ser melhor faz você evoluir de verdade.'
+                        tooltip: 'Retro não é reclamação, é melhoria. Parar pra pensar no que pode ser melhor faz você evoluir de verdade.',
+                        buttonTooltips: {
+                            1: 'Não há retrospectivas; o time nunca para para refletir sobre o processo.',
+                            2: 'Retrospectivas acontecem esporadicamente, sem frequência definida e sem acompanhamento de ações.',
+                            3: 'Retrospectivas são regulares, mas as ações identificadas nem sempre são implementadas.',
+                            4: 'Retrospectivas são regulares e a maioria das ações é implementada e acompanhada.',
+                            5: 'Retrospectivas são eficazes, com ações mensuráveis implementadas; os resultados são visíveis na evolução do processo.'
+                        }
                     },
                     { 
                         id: 11, 
                         text: 'O time utiliza diagramas de fluxo cumulativo (CFD) para visualizar tendências',
-                        tooltip: 'CFD é raio-x do fluxo. Mostra gargalos, acúmulos e problemas que você não vê só olhando o quadro.'
+                        tooltip: 'CFD é raio-x do fluxo. Mostra gargalos, acúmulos e problemas que você não vê só olhando o quadro.',
+                        buttonTooltips: {
+                            1: 'O CFD não é utilizado; o time não tem visibilidade sobre tendências de fluxo.',
+                            2: 'O conceito de CFD é conhecido, mas ainda não foi implementado na prática.',
+                            3: 'O CFD é gerado ocasionalmente, mas raramente é analisado ou usado para decisões.',
+                            4: 'O CFD é atualizado regularmente e usado para identificar gargalos e tendências de acúmulo.',
+                            5: 'O CFD é analisado ativamente em reuniões de fluxo; decisões de melhoria são tomadas com base nele constantemente.'
+                        }
                     },
                     { 
                         id: 12, 
                         text: 'As melhorias identificadas são implementadas e seus resultados são medidos',
-                        tooltip: 'Melhoria sem implementação é papo furado. E sem medir, você não sabe se funcionou ou foi perda de tempo.'
+                        tooltip: 'Melhoria sem implementação é papo furado. E sem medir, você não sabe se funcionou ou foi perda de tempo.',
+                        buttonTooltips: {
+                            1: 'Melhorias são raramente ou nunca implementadas; as mesmas discussões se repetem sem evolução.',
+                            2: 'Algumas melhorias são implementadas, mas sem acompanhamento de resultados.',
+                            3: 'A maioria das melhorias identificadas é implementada; resultados são observados, mas não sempre medidos.',
+                            4: 'Melhorias são implementadas sistematicamente e seus resultados são medidos com indicadores definidos.',
+                            5: 'Há um ciclo contínuo de melhoria com implementação, medição e aprendizado; o processo evolui visivelmente ao longo do tempo.'
+                        }
                     }
                 ]
             },
@@ -1293,22 +1377,50 @@ const app = {
                     { 
                         id: 13, 
                         text: 'O time realiza daily standups focados no fluxo de trabalho e não em status individual',
-                        tooltip: 'Daily boa foca no trabalho, não nas pessoas. É sobre desbloquear e fazer fluir, não reportar pra chefe.'
+                        tooltip: 'Daily boa foca no trabalho, não nas pessoas. É sobre desbloquear e fazer fluir, não reportar pra chefe.',
+                        buttonTooltips: {
+                            1: 'Não há daily ou ela é uma reunião de status individual desconectada do fluxo.',
+                            2: 'A daily acontece, mas ainda é focada em "o que cada um fez" em vez do fluxo de trabalho.',
+                            3: 'A daily começa a focar no quadro e no fluxo, mas ainda mistura status individual com frequência.',
+                            4: 'A daily é conduzida pelo quadro, focando em itens bloqueados e no fluxo; o time discute como desbloquear.',
+                            5: 'A daily é eficiente, focada 100% no fluxo; o time identifica e age sobre bloqueios de forma colaborativa e rápida.'
+                        }
                     },
                     { 
                         id: 14, 
                         text: 'Há transparência total sobre o trabalho em andamento para todos os membros do time',
-                        tooltip: 'Transparência elimina surpresas e permite ajuda mútua. Esconder trabalho só gera problema depois.'
+                        tooltip: 'Transparência elimina surpresas e permite ajuda mútua. Esconder trabalho só gera problema depois.',
+                        buttonTooltips: {
+                            1: 'O trabalho em andamento não é visível; cada um sabe apenas do próprio trabalho.',
+                            2: 'Há alguma visibilidade, mas trabalhos paralelos ou informais ainda ocorrem fora do quadro.',
+                            3: 'A maior parte do trabalho é visível no quadro, mas há exceções ocasionais.',
+                            4: 'Todo o trabalho em andamento está visível no quadro e o time tem plena consciência do que está acontecendo.',
+                            5: 'Há transparência total e ativa; o time não apenas visualiza, mas usa essa informação para colaborar e se ajustar constantemente.'
+                        }
                     },
                     { 
                         id: 15, 
                         text: 'O time colabora ativamente para desbloquear itens parados ou com problemas',
-                        tooltip: 'Item parado é desperdício. Time que se ajuda desbloqueia rápido e entrega mais.'
+                        tooltip: 'Item parado é desperdício. Time que se ajuda desbloqueia rápido e entrega mais.',
+                        buttonTooltips: {
+                            1: 'Cada um cuida apenas do seu trabalho; itens bloqueados ficam parados sem ação coletiva.',
+                            2: 'Há colaboração esporádica, mas a maioria dos bloqueios só é resolvida quando escalada.',
+                            3: 'O time se ajuda quando solicitado, mas a colaboração proativa ainda é rara.',
+                            4: 'O time age proativamente para desbloquear itens parados; a colaboração é parte natural do dia a dia.',
+                            5: 'A colaboração é intensa e natural; o time prioriza desbloquear itens coletivamente antes de iniciar novos trabalhos.'
+                        }
                     },
                     { 
                         id: 16, 
                         text: 'Existe um bom alinhamento entre o time e os stakeholders sobre prioridades',
-                        tooltip: 'Trabalhar na coisa errada é o maior desperdício. Alinhamento garante que você tá fazendo o que importa.'
+                        tooltip: 'Trabalhar na coisa errada é o maior desperdício. Alinhamento garante que você tá fazendo o que importa.',
+                        buttonTooltips: {
+                            1: 'Não há alinhamento; o time frequentemente trabalha em itens que os stakeholders não reconhecem como prioritários.',
+                            2: 'Há alinhamento parcial; reuniões de priorização ocorrem, mas mudanças frequentes geram retrabalho.',
+                            3: 'O alinhamento é razoável; na maioria do tempo o time trabalha nas prioridades corretas.',
+                            4: 'Stakeholders e time têm visão compartilhada das prioridades; mudanças são comunicadas de forma eficaz.',
+                            5: 'Há excelente alinhamento; stakeholders participam ativamente, confiam no processo e as prioridades raramente causam surpresas.'
+                        }
                     }
                 ]
             },
@@ -1319,22 +1431,50 @@ const app = {
                     { 
                         id: 17, 
                         text: 'O time possui definição clara de "pronto" (Definition of Done) para cada item',
-                        tooltip: 'DoD evita "99% pronto". Todo mundo sabe exatamente o que precisa pra considerar algo realmente terminado.'
+                        tooltip: 'DoD evita "99% pronto". Todo mundo sabe exatamente o que precisa pra considerar algo realmente terminado.',
+                        buttonTooltips: {
+                            1: 'Não há Definition of Done; o conceito de "pronto" é subjetivo e varia por pessoa.',
+                            2: 'Há um entendimento informal do que é pronto, mas nada documentado ou acordado formalmente.',
+                            3: 'A DoD existe e é conhecida pelo time, mas nem sempre é seguida de forma consistente.',
+                            4: 'A DoD está documentada, visível e é seguida pela maioria do time na maioria dos itens.',
+                            5: 'A DoD é seguida disciplinadamente por todos; é revisada periodicamente e atualizada conforme o processo evolui.'
+                        }
                     },
                     { 
                         id: 18, 
                         text: 'O time pratica integração contínua e testes automatizados',
-                        tooltip: 'CI e testes automatizados pegam bugs cedo. Quanto antes descobrir, mais barato é consertar.'
+                        tooltip: 'CI e testes automatizados pegam bugs cedo. Quanto antes descobrir, mais barato é consertar.',
+                        buttonTooltips: {
+                            1: 'Não há integração contínua nem testes automatizados; o processo é totalmente manual.',
+                            2: 'Há esforços iniciais para implementar CI ou testes automatizados, mas a cobertura é mínima.',
+                            3: 'A CI está implementada e há testes automatizados para as principais funcionalidades.',
+                            4: 'A CI roda a cada commit; os testes automatizados cobrem a maior parte do código e falhas são corrigidas rapidamente.',
+                            5: 'CI/CD completo com alta cobertura de testes; o pipeline é confiável e falhas são raras e resolvidas imediatamente.'
+                        }
                     },
                     { 
                         id: 19, 
                         text: 'Code reviews são realizados como parte do fluxo de trabalho',
-                        tooltip: 'Code review espalha conhecimento e melhora qualidade. Não é inspeção, é aprendizado colaborativo.'
+                        tooltip: 'Code review espalha conhecimento e melhora qualidade. Não é inspeção, é aprendizado colaborativo.',
+                        buttonTooltips: {
+                            1: 'Code reviews não são realizados; o código vai direto para produção sem revisão.',
+                            2: 'Code reviews acontecem ocasionalmente, mas não são uma prática sistemática do time.',
+                            3: 'Code reviews são feitos na maioria dos itens, mas sem critérios ou padrões definidos.',
+                            4: 'Code reviews são parte do fluxo; há critérios claros e são realizados em praticamente todos os itens.',
+                            5: 'Code reviews são uma prática consolidada e colaborativa; melhoram a qualidade e disseminam conhecimento de forma consistente.'
+                        }
                     },
                     { 
                         id: 20, 
                         text: 'O time trata a dívida técnica de forma proativa e sistemática',
-                        tooltip: 'Dívida técnica ignorada vira juros altos depois. Tratar com seriedade evita código podre que trava tudo.'
+                        tooltip: 'Dívida técnica ignorada vira juros altos depois. Tratar com seriedade evita código podre que trava tudo.',
+                        buttonTooltips: {
+                            1: 'A dívida técnica não é reconhecida ou é ignorada; o time só age quando há quebra em produção.',
+                            2: 'A dívida técnica é reconhecida, mas tratada de forma reativa e sem planejamento.',
+                            3: 'O time registra a dívida técnica e ocasionalmente reserva tempo para endereçá-la.',
+                            4: 'A dívida técnica é monitorada e há capacidade reservada regularmente para reduzi-la.',
+                            5: 'A dívida técnica é gerenciada proativamente com critérios de priorização; o time mantém o código saudável de forma disciplinada.'
+                        }
                     }
                 ]
             },
@@ -1345,22 +1485,50 @@ const app = {
                     { 
                         id: 21, 
                         text: 'O time revisa e ajusta os limites de WIP baseado em dados e experiência',
-                        tooltip: 'WIP não é dogma, é experimento. Ajustar baseado em dados faz o fluxo melhorar constantemente.'
+                        tooltip: 'WIP não é dogma, é experimento. Ajustar baseado em dados faz o fluxo melhorar constantemente.',
+                        buttonTooltips: {
+                            1: 'Os limites de WIP não existem ou nunca são revisados.',
+                            2: 'Os limites existem, mas foram definidos arbitrariamente e nunca foram revisados.',
+                            3: 'Os limites são revisados ocasionalmente, mas sem base em dados objetivos.',
+                            4: 'Os limites de WIP são revisados regularmente com base em métricas de fluxo e experiência do time.',
+                            5: 'Os limites de WIP são ajustados continuamente com base em dados; o time trata isso como parte essencial da melhoria do fluxo.'
+                        }
                     },
                     { 
                         id: 22, 
                         text: 'O processo Kanban é revisado e evoluído regularmente com base em feedback',
-                        tooltip: 'Processo engessado envelhece mal. Evoluir com base em feedback mantém relevância e eficácia.'
+                        tooltip: 'Processo engessado envelhece mal. Evoluir com base em feedback mantém relevância e eficácia.',
+                        buttonTooltips: {
+                            1: 'O processo nunca é revisado; o time usa as mesmas práticas indefinidamente sem questionar.',
+                            2: 'O processo é revisado raramente e apenas quando há problemas claros.',
+                            3: 'O processo é revisado periodicamente, mas as mudanças nem sempre são implementadas com agilidade.',
+                            4: 'O processo é revisado regularmente com base em feedback do time e dos dados; melhorias são aplicadas de forma consistente.',
+                            5: 'O processo Kanban evolui continuamente; o time tem uma cultura forte de experimentação e melhoria baseada em feedback e evidências.'
+                        }
                     },
                     { 
                         id: 23, 
                         text: 'O time experimenta com novas práticas e ferramentas para melhorar o fluxo',
-                        tooltip: 'Experimentar é aprender. Times que testam coisas novas descobrem jeitos melhores de trabalhar.'
+                        tooltip: 'Experimentar é aprender. Times que testam coisas novas descobrem jeitos melhores de trabalhar.',
+                        buttonTooltips: {
+                            1: 'O time nunca experimenta; há resistência ou medo de mudar a forma de trabalhar.',
+                            2: 'Experimentos acontecem raramente e de forma não estruturada, sem aprendizado registrado.',
+                            3: 'O time experimenta ocasionalmente novas práticas, mas sem ciclo claro de hipótese, teste e conclusão.',
+                            4: 'O time experimenta regularmente com novas práticas; os resultados são avaliados e o conhecimento é compartilhado.',
+                            5: 'A experimentação é parte da cultura do time; hipóteses são levantadas, testadas e os aprendizados impulsionam evolução contínua.'
+                        }
                     },
                     { 
                         id: 24, 
                         text: 'O time possui cultura de aprendizado contínuo e compartilhamento de conhecimento',
-                        tooltip: 'Conhecimento guardado é conhecimento desperdiçado. Compartilhar faz o time todo evoluir junto.'
+                        tooltip: 'Conhecimento guardado é conhecimento desperdiçado. Compartilhar faz o time todo evoluir junto.',
+                        buttonTooltips: {
+                            1: 'Não há cultura de aprendizado; o conhecimento fica retido em pessoas-chave e nunca é compartilhado.',
+                            2: 'Há interesse em aprendizado, mas as iniciativas são individuais e isoladas.',
+                            3: 'O time realiza algumas práticas de compartilhamento (como sessões técnicas ou documentação), mas de forma irregular.',
+                            4: 'O aprendizado e o compartilhamento de conhecimento são práticas regulares; o time cresce junto de forma consistente.',
+                            5: 'Há uma cultura forte de aprendizado contínuo; o time compartilha ativamente, aprende com erros e evolui coletivamente de forma natural.'
+                        }
                     }
                 ]
             }
