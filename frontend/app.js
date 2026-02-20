@@ -1533,7 +1533,14 @@ const app = {
                     { 
                         id: 13, 
                         text: 'Gestão de Impedimentos: Impedimentos são identificados, comunicados, analisados e resolvidos de forma consistente e sistêmica',
-                        tooltip: 'Impedimento não resolvido vira bloqueio. Aqui se vê se a empresa ajuda o time ou só cobra resultado.'
+                        tooltip: 'Impedimento não resolvido vira bloqueio. Aqui se vê se a empresa ajuda o time ou só cobra resultado.',
+                        buttonTooltips: {
+                            1: 'Invisíveis/Ignorados. Equipe tem medo ou é relutante em levantar impedimentos. Quando são levantados, não são resolvidos.',
+                            2: 'Levantar impedimentos é encorajado e frequente. Alguns são resolvidos. O time já vê benefícios desta prática.',
+                            3: 'Levantar impedimentos se torna rotina e o time se sente confortável. Em geral são resolvidos e análise de causa-raiz começa a ser feita.',
+                            4: 'Levantar impedimentos se torna cultura. Todos sentem que os pontos são endereçados e causas-raiz são identificadas e atuadas frequentemente.',
+                            5: 'Análise de causa-raiz faz parte da cultura da equipe.'
+                        }
                     }
                 ]
             },
@@ -1544,7 +1551,14 @@ const app = {
                     { 
                         id: 14, 
                         text: 'Reunião Diária: A equipe utiliza reuniões diárias para inspecionar o fluxo de trabalho, alinhar prioridades, identificar bloqueios e tomar ações rápidas',
-                        tooltip: 'Daily eficaz é rápida e focada no trabalho, não em status report. Serve pra desbloquear, não pra controlar.'
+                        tooltip: 'Daily eficaz é rápida e focada no trabalho, não em status report. Serve pra desbloquear, não pra controlar.',
+                        buttonTooltips: {
+                            1: 'As reuniões diárias nunca são realizadas.',
+                            2: 'As reuniões diárias são realizadas regularmente e estão evoluindo em direção ao próximo estágio.',
+                            3: '80% da equipe participa das reuniões diárias regularmente; a reunião principal dura menos de 20 minutos; impedimentos são levantados frequentemente; o foco está no trabalho do time e a equipe entende que a reunião é para ela própria.',
+                            4: 'As diárias são curtas e eficazes. Funcionam bem com ou sem alguém formal para conduzi-las. A equipe faz análises precisas do que precisa ser entregue e toma ações corretivas quando necessário.',
+                            5: 'A dinâmica das reuniões diárias é positivamente adaptada às necessidades do time.'
+                        }
                     },
                     { 
                         id: 15, 
