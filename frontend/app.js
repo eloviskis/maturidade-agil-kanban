@@ -1563,27 +1563,62 @@ const app = {
                     { 
                         id: 15, 
                         text: 'Retrospectiva e Kaizen: A equipe possui momentos estruturados para refletir sobre processos, relações e resultados, implementando melhorias contínuas',
-                        tooltip: 'Retro não é pra reclamar e esquecer. É pra identificar problemas e resolver de verdade. Melhoria contínua na veia.'
+                        tooltip: 'Retro não é pra reclamar e esquecer. É pra identificar problemas e resolver de verdade. Melhoria contínua na veia.',
+                        buttonTooltips: {
+                            1: 'Nunca são feitas.',
+                            2: 'São feitas, mas não de maneira regular.',
+                            3: 'São feitas regularmente, com boa participação e produzem itens de ação que, em geral, são endereçados.',
+                            4: 'São feitas regularmente, com boa participação, são agradáveis e produzem itens de ação que, em geral, são endereçados.',
+                            5: 'São feitas de forma criativa; o formato varia de tempos em tempos; são aguardadas pela equipe e, às vezes, geram novas ideias que produzem resultados concretos.'
+                        }
                     },
                     { 
                         id: 16, 
                         text: 'Trabalho Orientado a Valor: O trabalho da equipe é orientado à entrega de valor para usuários ou stakeholders',
-                        tooltip: 'Não adianta trabalhar muito se não gera valor. Foco no que importa pro usuário final, não em features bonitas.'
+                        tooltip: 'Não adianta trabalhar muito se não gera valor. Foco no que importa pro usuário final, não em features bonitas.',
+                        buttonTooltips: {
+                            1: 'Histórias de Usuário nunca são seguidas ou utilizadas.',
+                            2: 'Entende-se que Histórias de Usuário são importantes para o trabalho, e ações para sua adoção estão sendo tomadas.',
+                            3: 'Histórias de Usuário existem para ao menos 50% do trabalho, mas outros artefatos ainda são utilizados para entrega.',
+                            4: 'Histórias de Usuário existem para ao menos 80% do trabalho, embora alguns outros artefatos ainda sejam usados para entrega.',
+                            5: 'Todo o trabalho é baseado em Histórias de Usuário.'
+                        }
                     },
                     { 
                         id: 17, 
                         text: 'Previsibilidade e Compromisso: A equipe compreende sua capacidade real de entrega, utiliza dados históricos ou métricas de fluxo e assume compromissos realistas',
-                        tooltip: 'Prometer com base em dados é melhor que "achismo". Previsibilidade gera confiança e evita frustração.'
+                        tooltip: 'Prometer com base em dados é melhor que "achismo". Previsibilidade gera confiança e evita frustração.',
+                        buttonTooltips: {
+                            1: 'As estimativas são feitas de forma ad-hoc; pessoas que não desenvolvem são responsáveis pelas estimativas ou elas são realizadas de forma agregada por função.',
+                            2: 'As estimativas são feitas regularmente, porém apenas por alguns membros da equipe.',
+                            3: 'Todo o time participa das estimativas utilizando uma única métrica (ex.: pontos, T-shirt size, etc.).',
+                            4: '90% ou mais do time participa das estimativas, considerando os inputs de todos os membros.',
+                            5: 'As estimativas são feitas de forma consistente, ao menos semanalmente, por todo o time, utilizando sua própria referência e critérios definidos em conjunto.'
+                        }
                     },
                     { 
                         id: 18, 
                         text: 'Acompanhamento do Trabalho (WIP): A equipe acompanha o progresso do trabalho em andamento, tornando-o visível e utilizando essas informações para melhorar o fluxo',
-                        tooltip: 'Visibilidade do trabalho ajuda a identificar gargalos e distribuir melhor as tarefas. Quadro não é decoração.'
+                        tooltip: 'Visibilidade do trabalho ajuda a identificar gargalos e distribuir melhor as tarefas. Quadro não é decoração.',
+                        buttonTooltips: {
+                            1: 'O acompanhamento de progresso não está implementado.',
+                            2: 'O progresso é acompanhado por algum método (ex.: burndown, burnup, CFD, etc.) e eventualmente influencia o comportamento do time.',
+                            3: 'O progresso é acompanhado e regularmente influencia o comportamento do time.',
+                            4: 'O progresso é acompanhado e constantemente influencia o comportamento do time.',
+                            5: 'O time utiliza proativamente o acompanhamento do progresso para antecipar e endereçar potenciais problemas.'
+                        }
                     },
                     { 
                         id: 19, 
                         text: 'Revisão e Feedback: A equipe revisa entregas concluídas com stakeholders de forma frequente, coletando feedback e ajustando expectativas',
-                        tooltip: 'Feedback cedo evita trabalho jogado fora. Quanto antes mostrar, mais rápido corrige o rumo se precisar.'
+                        tooltip: 'Feedback cedo evita trabalho jogado fora. Quanto antes mostrar, mais rápido corrige o rumo se precisar.',
+                        buttonTooltips: {
+                            1: 'As revisões não acontecem de forma regular ou ocorrem com intervalo superior a 6 semanas.',
+                            2: 'As revisões acontecem ao menos a cada 6 semanas, porém apresentam problemas como: nem todas as histórias são revisadas, há pouca preparação, tenta-se "vender" a entrega em vez de alinhar expectativas não mapeadas, ou o feedback não é encorajado.',
+                            3: 'As revisões acontecem ao menos a cada 4 semanas; a maioria das histórias é revisada; há boa preparação e o feedback é incentivado para melhorias futuras.',
+                            4: 'As revisões fazem parte da cultura. Toda história é revisada; o time está bem preparado; o feedback é encorajado; há boa participação e a reunião é percebida como agregadora de valor aos stakeholders.',
+                            5: 'O time envolve stakeholders de forma proativa e regular, frequentemente supera expectativas nas Revisões e, devido à proximidade, descobre oportunidades e gera resultados positivos inesperados.'
+                        }
                     }
                 ]
             },
@@ -1594,17 +1629,38 @@ const app = {
                     { 
                         id: 20, 
                         text: 'Previsibilidade de Entrega: A equipe mede e melhora continuamente o tempo entre o início e a conclusão do trabalho, aumentando confiabilidade das entregas',
-                        tooltip: 'Saber quanto tempo leva pra entregar algo ajuda a planejar melhor e não prometer o impossível.'
+                        tooltip: 'Saber quanto tempo leva pra entregar algo ajuda a planejar melhor e não prometer o impossível.',
+                        buttonTooltips: {
+                            1: 'Nenhuma história é entregue em menos de 4 semanas (de "Preparado" para "Pronto") ou a capacidade de entrega não é medida e visível.',
+                            2: 'A capacidade de entrega é medida e visível.',
+                            3: 'A equipe busca ativamente melhorar sua capacidade de entrega.',
+                            4: '60% dos pontos das histórias vão de "Preparado" para "Pronto" em 4 semanas ou menos.',
+                            5: '90% dos pontos das histórias vão de "Preparado" para "Pronto" em 2 semanas ou menos.'
+                        }
                     },
                     { 
                         id: 21, 
                         text: 'Estratégia de Produto (Nível Estratégico): Há alinhamento entre visão estratégica de produto e o trabalho realizado pela equipe',
-                        tooltip: 'Time trabalhando sem saber o porquê é como remar sem direção. Alinhamento estratégico dá propósito ao trabalho.'
+                        tooltip: 'Time trabalhando sem saber o porquê é como remar sem direção. Alinhamento estratégico dá propósito ao trabalho.',
+                        buttonTooltips: {
+                            1: 'A gestão de produto não existe ou não está estabelecida.',
+                            2: 'Há esforços em andamento para evoluir a gestão de produto para o próximo nível.',
+                            3: 'Existe alguém responsável por atender às necessidades de Gestão de Produto da organização, incluindo estratégia de marketing e produto, com alinhamento próximo às necessidades da equipe.',
+                            4: 'As atividades de gestão de produto são delegadas a alguém que atua no nível da equipe ao menos 80% do tempo.',
+                            5: 'Há excelente alinhamento entre a gestão de produto no nível estratégico e no nível da equipe. Todos compreendem e executam suas atividades alinhadas à visão do produto.'
+                        }
                     },
                     { 
                         id: 22, 
                         text: 'Gestão de Produto (Nível da Equipe): Existe um papel claro responsável por priorizar demandas, maximizar valor, esclarecer requisitos e aceitar entregas',
-                        tooltip: 'Alguém precisa decidir o que é mais importante. PO claro evita time perdido com coisa errada.'
+                        tooltip: 'Alguém precisa decidir o que é mais importante. PO claro evita time perdido com coisa errada.',
+                        buttonTooltips: {
+                            1: 'A função de produto não existe ou não está estabelecida.',
+                            2: 'Há esforços em andamento para evoluir a função de produto para o próximo nível.',
+                            3: 'Existe uma única pessoa orientada a produto responsável por: garantir que há histórias preparadas para as sprints; participar das reuniões de planejamento; revisar e aceitar histórias prontas. Essa pessoa está disponível para responder dúvidas sobre histórias das próximas sprints dentro de algumas horas.',
+                            4: 'Em 80% do tempo, membros da equipe com dúvidas ou preocupações recorrem à pessoa de produto do time. Há alinhamento próximo entre essa pessoa e os níveis mais estratégicos de gestão de produto.',
+                            5: 'Há excelente alinhamento entre a gestão de produto no nível estratégico, no nível da equipe e entre os membros do time. Todos compreendem a visão do produto, executam suas atividades alinhadas a ela e trabalham de forma colaborativa.'
+                        }
                     },
                     { 
                         id: 23, 
