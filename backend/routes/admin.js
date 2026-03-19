@@ -180,6 +180,43 @@ router.get('/participation/:teamId/:cycleId', requireAdmin, async (req, res) => 
     }
 });
 
+// Trocar senha do admin
+router.put('/change-password', requireAdmin, async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+
+        if (!currentPassword || !newPassword) {
+            return res.status(400).json({ error: 'Informe a senha atual e a nova senha' });
+        }
+
+        if (newPassword.length < 6) {
+            return res.status(400).json({ error: 'A nova senha deve ter pelo menos 6 caracteres' });
+        }
+
+        // Buscar hash atual
+        const result = await db.query(
+            'SELECT password_hash FROM users WHERE id = $1',
+            [req.user.id]
+        );
+
+        const valid = await bcrypt.compare(currentPassword, result.rows[0].password_hash);
+        if (!valid) {
+            return res.status(401).json({ error: 'Senha atual incorreta' });
+        }
+
+        const newHash = await bcrypt.hash(newPassword, 10);
+        await db.query(
+            'UPDATE users SET password_hash = $1 WHERE id = $2',
+            [newHash, req.user.id]
+        );
+
+        res.json({ message: 'Senha alterada com sucesso' });
+    } catch (error) {
+        console.error('Erro ao alterar senha:', error);
+        res.status(500).json({ error: 'Erro ao alterar senha' });
+    }
+});
+
 // Estatísticas gerais
 router.get('/stats', requireAdmin, async (req, res) => {
     try {

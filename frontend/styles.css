@@ -873,6 +873,19 @@ body {
     animation: fadeIn 0.3s;
 }
 
+.settings-section {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 480px;
+}
+
+.settings-section h3 {
+    color: #0d2145;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
 .admin-actions {
     margin-bottom: 20px;
     padding: 20px;

@@ -217,10 +217,7 @@
                     <button class="admin-tab active" onclick="app.showAdminTab('evaluations')">📋 Avaliações</button>
                     <button class="admin-tab" onclick="app.showAdminTab('participation')">👥 Participação</button>
                     <button class="admin-tab" onclick="app.showAdminTab('stats')">📊 Estatísticas</button>
-                </div>
-
-                <!-- Tab: Avaliações -->
-                <div id="adminTabEvaluations" class="admin-tab-content">
+        <button class="admin-tab" onclick="app.showAdminTab('settings')">⚙️ Configurações</button>
                     <div class="admin-actions">
                         <button class="btn-danger" onclick="app.adminDeleteAllEvaluations()">🗑️ Zerar Todas as Avaliações</button>
                     </div>
@@ -255,9 +252,27 @@
                     <div id="adminStatsReport"></div>
                 </div>
 
-                <div class="submit-section">
-                    <button class="btn-back" onclick="app.backToMenu()">🏠 Voltar ao Menu</button>
-                </div>
+    <!-- Tab: Configurações -->
+    <div id="adminTabSettings" class="admin-tab-content" style="display: none;">
+        <div class="settings-section">
+            <h3>🔑 Alterar Senha</h3>
+            <div class="error-message" id="changePasswordError" style="display:none;"></div>
+            <div class="success-message" id="changePasswordSuccess" style="display:none;"></div>
+            <div class="team-info-section">
+                <label for="currentPassword">Senha atual:</label>
+                <input type="password" id="currentPassword" placeholder="Digite sua senha atual">
+
+                <label for="newPassword">Nova senha:</label>
+                <input type="password" id="newPassword" placeholder="Mínimo 6 caracteres">
+
+                <label for="confirmPassword">Confirmar nova senha:</label>
+                <input type="password" id="confirmPassword" placeholder="Repita a nova senha">
+            </div>
+            <div class="submit-section">
+                <button class="btn-submit" onclick="app.changeAdminPassword()">💾 Salvar Nova Senha</button>
+            </div>
+        </div>
+    </div>
             </div>
         </div>
     </div>

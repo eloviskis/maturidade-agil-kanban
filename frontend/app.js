@@ -944,6 +944,73 @@ const app = {
             await this.loadAdminEvaluations();
         } else if (tabName === 'stats') {
             await this.loadAdminStats();
+        } else if (tabName === 'settings') {
+            // Limpar campos ao entrar na aba
+            ['currentPassword', 'newPassword', 'confirmPassword'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            document.getElementById('changePasswordError').style.display = 'none';
+            document.getElementById('changePasswordSuccess').style.display = 'none';
+        }
+    },
+
+    // Trocar senha do admin
+    async changeAdminPassword() {
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const errorEl = document.getElementById('changePasswordError');
+        const successEl = document.getElementById('changePasswordSuccess');
+
+        errorEl.style.display = 'none';
+        successEl.style.display = 'none';
+
+        if (!currentPassword || !newPassword || !confirmPassword) {
+            errorEl.textContent = '⚠️ Preencha todos os campos';
+            errorEl.style.display = 'block';
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            errorEl.textContent = '⚠️ A nova senha e a confirmação não coincidem';
+            errorEl.style.display = 'block';
+            return;
+        }
+
+        if (newPassword.length < 6) {
+            errorEl.textContent = '⚠️ A nova senha deve ter pelo menos 6 caracteres';
+            errorEl.style.display = 'block';
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/admin/change-password`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.adminToken}`
+                },
+                body: JSON.stringify({ currentPassword, newPassword })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                errorEl.textContent = `❌ ${data.error}`;
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            successEl.textContent = '✅ Senha alterada com sucesso!';
+            successEl.style.display = 'block';
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        } catch (error) {
+            console.error('Erro ao alterar senha:', error);
+            errorEl.textContent = '❌ Erro ao conectar ao servidor';
+            errorEl.style.display = 'block';
         }
     },
 
