@@ -837,14 +837,14 @@ const app = {
 
     // Login admin
     async adminLogin() {
-        const email = document.getElementById('adminEmail').value.trim();
+        const email = 'admin@example.com';
         const password = document.getElementById('adminPassword').value;
         const errorMsg = document.getElementById('adminLoginError');
 
         errorMsg.style.display = 'none';
 
-        if (!email || !password) {
-            errorMsg.textContent = '⚠️ Preencha email e senha';
+        if (!password) {
+            errorMsg.textContent = '⚠️ Digite a senha';
             errorMsg.style.display = 'block';
             return;
         }
