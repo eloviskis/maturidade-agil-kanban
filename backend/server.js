@@ -43,8 +43,8 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Algo deu errado!', message: err.message });
 });
 
-// Iniciar servidor apenas se não estiver no Vercel
-if (process.env.NODE_ENV !== 'production') {
+// Iniciar servidor apenas se não estiver no Vercel (serverless)
+if (!process.env.VERCEL) {
     app.listen(PORT, () => {
         console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
         console.log(`📊 API disponível em http://localhost:${PORT}/api`);
